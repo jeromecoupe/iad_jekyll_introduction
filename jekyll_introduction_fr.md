@@ -343,7 +343,7 @@ Si vous souhaitez omettre les deux premiers posts de votre boucle, vous pouvez u
 {% endfor %}
 ```
 
-Liquid vous permet également d'utiliser les structures de contrôle classiques telles que `[if](https://github.com/shopify/liquid/wiki/Liquid-for-Designers#if--else)` ou `[case](https://github.com/shopify/liquid/wiki/Liquid-for-Designers#case-statement)` dans le cadre de vos templates.
+Liquid vous permet également d'utiliser les structures de contrôle classiques telles que [`if`](https://github.com/shopify/liquid/wiki/Liquid-for-Designers#if--else) ou [`case`](https://github.com/shopify/liquid/wiki/Liquid-for-Designers#case-statement) dans le cadre de vos templates.
 
 ```liquid
 {% if user.age > 18 %}
