@@ -210,11 +210,11 @@ Jekyll permet également de définir des [fichiers de données](http://jekyllrb.
 
 Maintenant que nous avons vu comment créer vos données dans Jekyll, voyons comment utiliser ces données structurées dans vos templates.
 
-### Liquid comme language de templating
+### Liquid comme langage de templating
 
-Jekyll utilise [Liquid](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers) comme language de templating. Liquid à été créé par [Shopify](https://www.shopify.com/) pour permettre à ses utilisateurs d'appliquer leurs propres layouts à leurs projets de e-commerce.
+Jekyll utilise [Liquid](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers) comme langage de templating. Liquid à été créé par [Shopify](https://www.shopify.com/) pour permettre à ses utilisateurs d'appliquer leurs propres layouts à leurs projets de e-commerce.
 
-Liquid reste un language très simple mais qui permet tout de même une grande souplesse d'utilisation. En plus des tags Liquid standards, Jekyll offre aussi quelques [filtres](http://jekyllrb.com/docs/templates/#filters) et [tags](http://jekyllrb.com/docs/templates/#tags) qui lui sont propres.
+Liquid reste un langage très simple mais qui permet tout de même une grande souplesse d'utilisation. En plus des tags Liquid standards, Jekyll offre aussi quelques [filtres](http://jekyllrb.com/docs/templates/#filters) et [tags](http://jekyllrb.com/docs/templates/#tags) qui lui sont propres.
 
 ### Tags
 
