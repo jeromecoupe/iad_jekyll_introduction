@@ -4,23 +4,23 @@
 
 [Jekyll](http://jekyllrb.com) est un générateur de sites statiques créé par [Tom Preston Werner](http://tom.preston-werner.com/). Jekyll est un projet open source maintenu par [Parker Moore](https://byparker.com/) et la communauté.
 
-Jekyll vous permet de développer des sites basés sur des templates dynamiques (codés avec [Liquid](http://liquidmarkup.org/)) et des fichiers de contenus (YAML / Markdown / HTML / JSON / CSV). Sur base de ces fichiers, Jekyll va générer un site entièrement statique que vous pourrez ensuite déployer sur n'importe quel serveur web ou sur [Github Pages](https://pages.github.com/).
+Jekyll vous permet de développer des sites basés sur des templates dynamiques (codés avec [Liquid](http://liquidmarkup.org/)) et des fichiers de contenus (YAML / Markdown / HTML / JSON / CSV). Sur base de ces fichiers, Jekyll va générer un site entièrement statique que vous pourrez ensuite déployer sur n'importe quel serveur web ou sur [GitHub Pages](https://pages.github.com/).
 
 Jekyll tourne sous [Ruby](https://www.ruby-lang.org). Le workflow le plus répandu consiste à générer son site localement et à mettre en ligne les fichiers statiques ainsi générés.
 
-Si vous utilisez GitHub Pages, il vous suffira de mettre en ligne l'ensemble de vos fichiers, une instance de Jekyll tournant sur Github se chargera de générer votre site pour vous.  
+Si vous utilisez GitHub Pages, il vous suffira de mettre en ligne l'ensemble de vos fichiers, une instance de Jekyll tournant sur GitHub se chargera de générer votre site pour vous.  
 
 ## Installation
 
-Pour installer Jekyll, il nous fait d'abord installer Ruby. Voici une petite marche à suivre.
+Pour installer Jekyll, il nous faut d'abord installer Ruby. Voici une petite marche à suivre.
 
 ### Installation de Ruby
 
-Ruby est installé par défaut sur les mac. Voici cependant la procédure à suivre pour installer Ruby ou mettre à jour la version dont vous disposez.
+Ruby est installé par défaut sur les Mac. Voici cependant la procédure à suivre pour installer Ruby ou mettre à jour la version dont vous disposez.
 
 #### Installation de Homebrew
 
-Homebrew est un outil vous permettant d'installer facilement des packages unix sur votre mac.
+Homebrew est un outil vous permettant d'installer facilement des packages Unix sur votre Mac.
 
 `ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"`
 
@@ -28,7 +28,7 @@ Faites ensuite un petit `brew doctor` pour vérifier que tout est en ordre. Si v
 
 #### Installation de RVM
 
-La méthode conseillée sur mac est d'installer RVM (Ruby Version Manager) qui vous permettra facilement de manager Ruby sur votre machine.
+La méthode conseillée sur Mac est d'installer RVM (Ruby Version Manager) qui vous permettra facilement de gérer Ruby sur votre machine.
 
 `\curl -#L https://get.rvm.io | bash -s stable --ruby`
 
@@ -36,13 +36,13 @@ Cette commande installera la dernière version stable de RVM, ainsi que la derni
 
 #### Mise à Jour de RVM
 
-Pour être certain de disposer de la dernière version de RVM, utilisez la commande suivante:
+Pour être certain de disposer de la dernière version de RVM, utilisez la commande suivante :
 
 `rvm get stable`
 
 #### Mise à jour de Ruby
 
-Chercher quelle est la dernière version stable de Ruby disponible
+Chercher quelle est la dernière version stable de Ruby disponible :
 
 `rvm list known`
 
@@ -50,13 +50,13 @@ Vous obtiendrez une longue liste de versions. Installez la dernière en date à 
 
 `rvm install 2.2.3`
 
-Vous pouvez ensuite choisir quelle version de Ruby vous voulez utiliser:
+Vous pouvez ensuite choisir quelle version de Ruby vous voulez utiliser :
 
 `rvm list` et `rvm --default use 2.2.3`
 
 ### Installation de la gem Jekyll
 
-Pour installer Jekyll, il vous suffit d'utiliser la commande suivante:
+Pour installer Jekyll, il vous suffit d'utiliser la commande suivante :
 
 `gem install jekyll`
 
@@ -68,23 +68,23 @@ Pour installer Jekyll, il vous suffit d'utiliser la commande suivante:
 
 ### Mise en place
 
-Pour utiliser Jekyll, il vous suffit de créer un dossier dans votre environnement de développement local et d'utiliser la commande suivante:
+Pour utiliser Jekyll, il vous suffit de créer un dossier dans votre environnement de développement local et d'utiliser la commande suivante :
 
 `jekyll new mondossiersite/` ou `jekyll new .` pour installer Jekyll dans le dossier courant.
 
-Jekyll devrait vous créer l'arborescence suivante (nous y reviendrons dans le détail):
+Jekyll devrait vous créer l'arborescence suivante (nous y reviendrons dans le détail) :
 
-- **_config.yaml**: fichier de configuration principal de votre site Jekyll
-- **_includes**: contient vos includes
-- **_layouts**: contient vos fichiers de layout
-	- **default.html**: layout par défaut
-	- **post.html**: layout utilisé pour vos posts
-- **_posts**: dossier contenant vos blogposts
-- **_sass**: contient vos fichiers .scss
-- **css**: contient votre fichier .scss maître qui importe les autres
-- **about.md**: contient votre page about
-- **index.html**: la homepage de votre site
-- **feed.xml**: un template de flux RSS
+- **_config.yaml** : fichier de configuration principal de votre site Jekyll
+- **_includes** : contient vos includes
+- **_layouts** : contient vos fichiers de layout
+	- **default.html** : layout par défaut
+	- **post.html** : layout utilisé pour vos posts
+- **_posts** : dossier contenant vos blogposts
+- **_sass** : contient vos fichiers .scss
+- **css** : contient votre fichier .scss maître qui importe les autres
+- **about.md** : contient votre page about
+- **index.html** : la homepage de votre site
+- **feed.xml** : un template de flux RSS
 
 ### Concepts de base et fonctionnement
 
@@ -109,11 +109,11 @@ Certaines de ces options de configuration sont implicites ([spécifiées par dé
 
 ## Créer votre data structure
 
-Jekyll vous propose différentes façons de créer vos données et de les structurer. Les trois outils principaux à votre disposition sont:
+Jekyll vous propose différentes façons de créer vos données et de les structurer. Les trois outils principaux à votre disposition sont :
 
-- **pages**: permettent de gérer contenus isolés, sans aucun lien logique avec d'autres (homepage, contact, etc.)
-- **collections**: permettent de gérer des contenus liés entre eux de façon logique, faisant partie d'un même ensemble. Les fichiers membres d'une collection peuvent éventuellement générer un fichier propre (output: true) et également avoir une URL (permalink).
-- **data**: permet de gérer des contenus structurés dans des formats tels que YAML ou JSON.
+- **pages** : permettent de gérer contenus isolés, sans aucun lien logique avec d'autres (homepage, contact, etc.)
+- **collections** : permettent de gérer des contenus liés entre eux de façon logique, faisant partie d'un même ensemble. Les fichiers membres d'une collection peuvent éventuellement générer un fichier propre (output: true) et également avoir une URL (permalink).
+- **data** : permet de gérer des contenus structurés dans des formats tels que YAML ou JSON.
 
 ### Pages
 
@@ -130,7 +130,7 @@ collections:
 	macollection:
 ```
 
-Vous pouvez spécifier pour chaque collection si les fichiers qui la composent vont générer un output (un fichier propre) après traitement par Jekyll. Vous pouvez définir l'URL de ces fichiers via la variable `permarlink` (voir infra). Les fichiers d'une collection vont également générer automatiquement une variable `date` si vos noms de fichiers commençent par une date.
+Vous pouvez spécifier pour chaque collection si les fichiers qui la composent vont générer un output (un fichier propre) après traitement par Jekyll. Vous pouvez définir l'URL de ces fichiers via la variable `permalink` (voir infra). Les fichiers d'une collection vont également générer automatiquement une variable `date` si vos noms de fichiers commencent par une date.
 
 ```yaml
 collections:
@@ -140,7 +140,7 @@ collections:
 
 Des caractéristiques communes pour tous les fichiers d'une collection peuvent être définies via des [variables YAML par défaut](http://jekyllrb.com/docs/configuration/#Front Matter-defaults) (voir infra).
 
-#### Posts: une collection particulière
+#### Posts : une collection particulière
 
 [Les posts](http://jekyllrb.com/docs/posts/) viennent du fait que Jekyll a été conçu à la base comme un outil de blogging. Toutes les installations de Jekyll comprennent donc une collection par défaut nommée `_posts` qui est définie implicitement par Jekyll.
 
@@ -148,15 +148,15 @@ Des caractéristiques communes pour tous les fichiers d'une collection peuvent �
 
 L'ensemble des variables définies dans les YAML Front Matter sont accessibles dans vos templates via l'objet `page` en syntaxe pointée.
 
-Certaines variables sont propres à jekyll et peuvent être utilisées pour l'ensemble de vos fichiers:
+Certaines variables sont propres à Jekyll et peuvent être utilisées pour l'ensemble de vos fichiers :
 
-- **layout:** spécifie le layout à utiliser (voir la section consacrée au layout)
-- **permalink:** spécifie le permalink et le chemin à utiliser pour l'output du fichier
-- **published:** spécifie si le fichier doit être publié ou pas
-- **category / categories:** spécifie les catégories à appliquer au fichier
-- **tags:** spécifie les tags à appliquer au fichier
+- **layout :** spécifie le layout à utiliser (voir la section consacrée au layout)
+- **permalink :** spécifie le permalink et le chemin à utiliser pour l'output du fichier
+- **published :** spécifie si le fichier doit être publié ou pas
+- **category / categories :** spécifie les catégories à appliquer au fichier
+- **tags :** spécifie les tags à appliquer au fichier
 
-Vous pouvez également définir vos propres variables dans les YAML Front Matter de vos fichiers en utilisant les différents types de données disponibles en YAML: strings, lists, nested lists, etc.
+Vous pouvez également définir vos propres variables dans les YAML Front Matter de vos fichiers en utilisant les différents types de données disponibles en YAML : strings, lists, nested lists, etc.
 
 ```
 ---
@@ -177,8 +177,8 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque nobis perspicia
 
 Plutôt que de définir les caractéristiques communes des fichiers dans leur YAML Front Matters individuels, vous pouvez utiliser votre fichier `_config.yaml` et spécifier des [valeurs de YAML Front Matter par défaut](http://jekyllrb.com/docs/configuration/#front-matter-defaults). Via la variable `defaults:`, votre fichier de configuration vous permet de définir des valeurs par défaut pour des variables communes à un ensemble de fichiers. Ces ensembles sont définis soit par un `path` (obligatoire) et par un `type` (optionnel).
 
-- **path**: chemin depuis la racine du projet. Une valeur pour path est obligatoire, même si vous utilisez un type. Une valeur vide permet de cibler l'ensemble des fichiers du site.
-- **type**: type de fichier. Les types disponibles sont `pages`, `posts`, `nomcollection`
+- **path** : chemin depuis la racine du projet. Une valeur pour path est obligatoire, même si vous utilisez un type. Une valeur vide permet de cibler l'ensemble des fichiers du site.
+- **type** : type de fichier. Les types disponibles sont `pages`, `posts`, `nomcollection`.
 
 Vous pouvez ainsi spécifier facilement la valeur par défaut pour les variables `layout`, `category` ou `permalink` propres à Jekyll ou encore pour une variable de votre cru. Ces valeurs par défaut peuvent être surdéterminées par les valeurs dans le YAML Front Matter des fichiers individuels.
 
@@ -204,7 +204,7 @@ defaults:
 
 ### Data
 
-Jekyll permet également de définir des [fichiers de données](http://jekyllrb.com/docs/datafiles/). Le dossier `_data` permet de stocker des fichiers structurés en YAML, JSON ou CSV et rendre ces données disponibles pour Liquid et Jekyll. Ces données seront accessible via l'objet `site.data`. Par exemple, pour accéder au données du fichier `_data/mesdonnees.json` en liquid nous pouvons utiliser l'objet `site.data.mesdonnees`.
+Jekyll permet également de définir des [fichiers de données](http://jekyllrb.com/docs/datafiles/). Le dossier `_data` permet de stocker des fichiers structurés en YAML, JSON ou CSV et rendre ces données disponibles pour Liquid et Jekyll. Ces données seront accessibles via l'objet `site.data`. Par exemple, pour accéder aux données du fichier `_data/mesdonnees.json` en Liquid, nous pouvons utiliser l'objet `site.data.mesdonnees`.
 
 ## Créer vos templates
 
@@ -218,12 +218,12 @@ Liquid reste un langage très simple mais qui permet tout de même une grande so
 
 ### Tags
 
-Liquid comporte deux principaux types de tags:
+Liquid comporte deux principaux types de tags :
 
 1. Les tags d'affichage `{{ affichage }}` qui permettent d'écrire des variables dans vos templates.
-2. Les tags de logique ou d'exécution `{% logique %}`. Par exemple `{% if %}`, `{% endif %}` ou `{% assign mavariable = site.macollection %}`
+2. Les tags de logique ou d'exécution `{% logique %}`. Par exemple `{% if %}`, `{% endif %}` ou `{% assign mavariable = site.macollection %}`.
 
-### Rester DRY: includes et layouts
+### Rester DRY : includes et layouts
 
 #### Layouts
 
@@ -231,7 +231,7 @@ Jekyll vous permet de travailler à l'aide de fichiers de layout. Ceux-ci sont p
 
 Pour utiliser un layout, il suffit de spécifier le nom de fichier du layout à utiliser dans le YAML Front Matter du fichier enfant. Jekyll ira chercher le fichier de layout dans le dossier `_layouts`. Vous pouvez modifier cela dans votre fichier `config.yaml` via la variable `layouts_dir:  ./_layouts`.
 
-Voici à quoi cela ressemble:
+Voici à quoi cela ressemble :
 
 **enfant**: *index.html*
 ```
@@ -381,7 +381,7 @@ Commençons par le tag `assign` qui vous permet simplement de créer une variabl
 {% endfor %}
 ```
 
-Dans ce cas précis, combiner un classement alphabétique sur le titre et le parametre reversed n'est possible qu'en faisant les choses en deux étapes en utilisant `assign`. Voici également une autre application combinant plusieurs filtres et utilisant le paramètre `limit`. Grâce à `assign`, le code reste très lisible.
+Dans ce cas précis, combiner un classement alphabétique sur le titre et le paramètre `reversed` n'est possible qu'en faisant les choses en deux étapes en utilisant `assign`. Voici également une autre application combinant plusieurs filtres et utilisant le paramètre `limit`. Grâce à `assign`, le code reste très lisible.
 
 ```liquid
 {% assign blogpostsPerTitle = site.posts | sort: 'title' | reverse %}
@@ -395,17 +395,17 @@ Dans ce cas précis, combiner un classement alphabétique sur le titre et le par
 {% endfor %}
 ```
 
-### Filtres: `sort`, `group_by` et `where`
+### Filtres : `sort`, `group_by` et `where`
 
-Liquid possède [une série de filtres](https://github.com/shopify/liquid/wiki/Liquid-for-Designers#standard-filters) qui peuvent s'avérer forts utiles et dont la plupart servent à faire de la manipulation de chaînes de caractères.
+Liquid possède [une série de filtres](https://github.com/shopify/liquid/wiki/Liquid-for-Designers#standard-filters) qui peuvent s'avérer fort utiles et dont la plupart servent à faire de la manipulation de chaînes de caractères.
 
 Jekyl possède quant à lui quelques filtres qui lui sont propres. Parmi eux, trois sont essentiels au niveau de la manipulation de tableaux ou de hashes.
 
-- `sort`: permet, comme nous venons de le voir, de trier un tableau ou un hash à l'aide d'une de ses valeurs.
-- `group_by`: permet de grouper un tableau ou un hash par l'une de ses variables ou keys.
-- `where`: permet de filtrer les éléments d'un tableau ou d'un hash à l'aide d'une de ses valeurs.
+- `sort` : permet, comme nous venons de le voir, de trier un tableau ou un hash à l'aide d'une de ses valeurs.
+- `group_by` : permet de grouper un tableau ou un hash par l'une de ses variables ou keys.
+- `where` : permet de filtrer les éléments d'un tableau ou d'un hash à l'aide d'une de ses valeurs.
 
-Voici quelques exemples d'applications pour les filtres `group_by` et `sort`:
+Voici quelques exemples d'applications pour les filtres `group_by` et `sort` :
 
 `group_by` et des boucles imbriquées permettent par exemple de créer facilement une archive de posts par année. Il faut pour cela que chacun de vos posts possède une variable `publication_year` dans son YAML Front Matter.
 
@@ -440,7 +440,7 @@ Le filtre `where` va permettre de filtrer les éléments d'un array, par exemple
 
 ### Data et fichier YAML
 
-Comme dit plus haut, Jekyll vous permet de manipuler à l'aide e Liquid des fichiers de données structurées. Voici un exemple de navigation créée sur base d'un fichier YAML.
+Comme dit plus haut, Jekyll vous permet de manipuler à l'aide de Liquid des fichiers de données structurées. Voici un exemple de navigation créée sur base d'un fichier YAML.
 
 **nav**: *_data/nav.yaml*
 ```yaml
@@ -477,23 +477,23 @@ Comme dit plus haut, Jekyll vous permet de manipuler à l'aide e Liquid des fich
 {% endfor %}
 ```
 
-## Jekyll et Github pages
+## Jekyll et GitHub Pages
 
-Jekyll est aussi le moteur de Github pages, un outil qui permet de gérer et d'héberger des sites statiques. Tous les repositories Github permettent de faire tourner Jekyll. La marche à suivre est différenets selon qu'il s'agit d'un projet ou d'une page de user ou d'organisation mais cela reste assez simple.
+Jekyll est aussi le moteur de Github Pages, un outil qui permet de gérer et d'héberger des sites statiques. Tous les repositories GitHub permettent de faire tourner Jekyll. La marche à suivre est différente selon qu'il s'agit d'un projet ou d'une page de user ou d'organisation mais cela reste assez simple.
 
-Le duo Jekyll et Github Pages vous permet de disposer d'un environnement collaboratif, d'un hébergement gratuit et d'un site entièrement gérer via Git.
+Le duo Jekyll et GitHub Pages vous permet de disposer d'un environnement collaboratif, d'un hébergement gratuit et d'un site entièrement géré via Git.
 
 ## Ressources
 
-- [Jekyll](http://jekyllrb.com/): le site officiel
-- [Jekyll Talk](https://talk.jekyllrb.com/): le forum officiel pour poser vos question, discuter Jekyll, etc.
-- [Installing Jekyll](http://davidensinger.com/2013/03/installing-jekyll/) - David Ensinger: tout ce dont vous avez besoin pour installer Jekyll sur un Mac
-- [Liquid for Designers](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers): une bonne introduction aux principaux tags et filtres de Liquid. N'oubliez pas de regarder également les [filtres](http://jekyllrb.com/docs/templates/#filters) et [tags](http://jekyllrb.com/docs/templates/#tags) propres à Jekyll.
-- [Jekyll: much more than a static site generator](http://webstoemp.com/blog/jekyll-more-than-a-blog-generator/) - Jérôme Coupé: Un blogpost par votre serviteur sur les nouveautés dans Jekyll 2.0
-- [Using Jekyll and GitHub Pages for Our Site](https://developmentseed.org/blog/2011/09/09/jekyll-github-pages/) - Young Hahn: sans doute l'une des meilleures introduction à Jekyll sur le plan de la philosophie de travail. Inclus également quelques perspectives techniques.
-- [Jekyll and CMS-less websites with Young Hahn and Dave Cole](http://5by5.tv/webahead/54) (Podcast) - Jen Simmons, Young Hahn, Dave Cole: épisode du podcast "The Web Ahead" consacré à Jekyll et à d'autres file based CMS.
-- [Intro to Jekyll](https://www.youtube.com/watch?v=O7NBEFmA7yA) (Video) - Johan Ronsse: une bonne introduction à Jekyll comme outil de prototypage.
-- [Jekyll From Scratch - Getting Started](http://pixelcog.com/blog/2013/jekyll-from-scratch-introduction/), [Jekyll From Scratch - Core Architecture](http://pixelcog.com/blog/2013/jekyll-from-scratch-core-architecture/) et [Jekyll From Scratch - Extending Jekyll](http://pixelcog.com/blog/2013/jekyll-from-scratch-extending-jekyll/) - Mike Greiling: introduction très complète à tous les aspects de Jekyll.
-- [Get Started With GitHub Pages (Plus Bonus Jekyll)](https://24ways.org/2013/get-started-with-github-pages/) - Anna Debenham: bonne introduction au duo Github pages et Jekyll
-- [Build A Blog With Jekyll And GitHub Pages](http://www.smashingmagazine.com/2014/08/build-blog-jekyll-github-pages/) - Barry Clark: une  introduction centrée sur un blog.
-- [Front-end style guides with Jekyll](http://webstoemp.com/blog/front-end-style-guides-jekyll/) - Jérôme Coupé: utilisation de Jekyll pour réaliser facilement des styles guides.
+- [Jekyll](http://jekyllrb.com/) : le site officiel
+- [Jekyll Talk](https://talk.jekyllrb.com/) : le forum officiel pour poser vos question, discuter Jekyll, etc.
+- [Installing Jekyll](http://davidensinger.com/2013/03/installing-jekyll/) - David Ensinger : tout ce dont vous avez besoin pour installer Jekyll sur un Mac
+- [Liquid for Designers](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers) : une bonne introduction aux principaux tags et filtres de Liquid. N'oubliez pas de regarder également les [filtres](http://jekyllrb.com/docs/templates/#filters) et [tags](http://jekyllrb.com/docs/templates/#tags) propres à Jekyll.
+- [Jekyll: much more than a static site generator](http://webstoemp.com/blog/jekyll-more-than-a-blog-generator/) - Jérôme Coupé : Un blogpost par votre serviteur sur les nouveautés dans Jekyll 2.0
+- [Using Jekyll and GitHub Pages for Our Site](https://developmentseed.org/blog/2011/09/09/jekyll-github-pages/) - Young Hahn : sans doute l'une des meilleures introduction à Jekyll sur le plan de la philosophie de travail. Inclus également quelques perspectives techniques.
+- [Jekyll and CMS-less websites with Young Hahn and Dave Cole](http://5by5.tv/webahead/54) (Podcast) - Jen Simmons, Young Hahn, Dave Cole : épisode du podcast "The Web Ahead" consacré à Jekyll et à d'autres *file-based CMS*.
+- [Intro to Jekyll](https://www.youtube.com/watch?v=O7NBEFmA7yA) (Video) - Johan Ronsse : une bonne introduction à Jekyll comme outil de prototypage.
+- [Jekyll From Scratch - Getting Started](http://pixelcog.com/blog/2013/jekyll-from-scratch-introduction/), [Jekyll From Scratch - Core Architecture](http://pixelcog.com/blog/2013/jekyll-from-scratch-core-architecture/) et [Jekyll From Scratch - Extending Jekyll](http://pixelcog.com/blog/2013/jekyll-from-scratch-extending-jekyll/) - Mike Greiling : introduction très complète à tous les aspects de Jekyll.
+- [Get Started With GitHub Pages (Plus Bonus Jekyll)](https://24ways.org/2013/get-started-with-github-pages/) - Anna Debenham : bonne introduction au duo Github Pages et Jekyll
+- [Build A Blog With Jekyll And GitHub Pages](http://www.smashingmagazine.com/2014/08/build-blog-jekyll-github-pages/) - Barry Clark : une  introduction centrée sur un blog.
+- [Front-end style guides with Jekyll](http://webstoemp.com/blog/front-end-style-guides-jekyll/) - Jérôme Coupé : utilisation de Jekyll pour réaliser facilement des styles guides.
