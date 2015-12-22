@@ -18,7 +18,7 @@ To install Jekyll, you must first install Ruby. Here is how I do it.
 
 ### Installing Ruby
 
-Ruby is installed by default on OSX. Nonetheless, here is the process I follow to install Ruby or update the version installed on your machine.
+Ruby is installed by default on OSX. Nonetheless, here is the process I follow to install Ruby or update the version installed on my machine.
 
 If you are running Windows, your best bet is probably [Ruby Installer](http://rubyinstaller.org). After installing it, just install the Jekyll gem like specified below.
 
@@ -81,8 +81,8 @@ Jekyll will create the following folders and files for you. We will come back to
 - **_config.yaml**: main configuration file for your Jekyll site
 - **_includes**: contains your include files
 - **_layouts**: contains your layout files
-	- **default.html**: default layout
-	- **post.html**: layout used by blogposts
+  - **default.html**: default layout
+  - **post.html**: layout used by blogposts
 - **_posts**: contains all your blogposts
 - **_sass**: contains you .scss files
 - **css**: contains your master .scss file importing all the others
@@ -90,14 +90,16 @@ Jekyll will create the following folders and files for you. We will come back to
 - **index.html**: the template for the homepage of your site
 - **feed.xml**: the template of your RSS feed
 
-### Basic concepts and way of working
+### Basic concepts and commands
 
 Jekyll will use these files and folders as a basis to create a fully static website. This static wbeiste is generated in the `_site` folder by default.
 
 - Jekyll will process all files with a YAML Front Matter (including empty YAML Front Matters), amke them available in memory and make them usable by the Liquid templating engine and Jekyll tags.
 - Files and folders with a name starting with underscore will not be transfered to the `_site` folder, whicle the others will be after having been processed by the Jekyll pipeline.
 
-When in your project folder, the `jekyll build` command is used to generate your website. If you want the regeration to happen every time a file is changed, just use the `--watch` flag: `jekyll build --watch`.
+When in your project folder, the `jekyll build` command is used to generate your website. If you want the regeneration to happen every time a file is changed, just use the `--watch` flag: `jekyll build --watch`.
+
+You can also use `jekyll serve` to launch a developement server and vie your site at `http://localhost:4000/` (auto-regenaration is on by default).
 
 Since Jekyll 3.0.0 you can use `jekyll build --incremental` to regenerate only the parts of the site that changed instead of the hole thing each time, a big deal for huge websites. You can also use `jekyll build --profiler` and Jekyll will give you a build time for each of your resources to identify possible bottlenecks.
 
@@ -131,15 +133,15 @@ Given a `_mycollection` folder, the following would define the collection in you
 
 ```yaml
 collections:
-	mycollection:
+  mycollection:
 ```
 
 For each defined collection, you can specify if you want every file in the collection to generate a separate HTML file as an output after Jekyll has done its thing. You can define the URL structure of those files via the `permalink` variable. Each file in a collection will also automatically generate a `date` variable if your filenames start with a date.
 
 ```yaml
 collections:
-	mycollection:
-		output: true
+  mycollection:
+    output: true
     permalink: /collection/:year/:title
 ```
 
@@ -147,7 +149,7 @@ Common characteristics and variables for all items in a collection can be define
 
 #### Posts: a collection with a special status
 
-[Posts](http://jekyllrb.com/docs/posts/) harken back to the early days of Jekyll, when it was created as a blogging platform. All Jekyll installations now have a default `_posts` that Jekyll defines implicitely.
+[Posts](http://jekyllrb.com/docs/posts/) harken back to the early days of Jekyll, when it was created as a blogging platform. All Jekyll installations now have a default `_posts` that Jekyll defines implicitely. The `posts` collection has a special status in Jekyll and has functionalities that are not yet available to regular collections. A prime example would be the category and tag management available for posts.
 
 ### YAML Front Matter variables
 
@@ -170,9 +172,9 @@ title: my title
 summary: this is a summary
 myVariable: test
 myList:
-	- item 1
-	- item 2
-	- item 3
+  - item 1
+  - item 2
+  - item 3
 ---
 
 ## Second level title
@@ -191,23 +193,23 @@ For example, you can specify common values for Jekyll-specific variables like `l
 
 ```yaml
 defaults:
-	scope:
-		path: "/about"
-	values:
+  scope:
+    path: "/about"
+  values:
     layout: "default"
-		myVariable: myValue
+    myVariable: myValue
 ```
 
 or
 
 ```yaml
 defaults:
-	scope:
-		path: "" # all files in your project
-		type: "portfolio" # files in the "portfolio" collection
-	values:
+  scope:
+    path: "" # all files in your project
+    type: "portfolio" # files in the "portfolio" collection
+  values:
     layout: "default"
-		myVariable: myValue
+    myVariable: myValue
 ```
 
 ### Data
@@ -245,7 +247,7 @@ When it runs, Jekyll makes a bunch of variables available to you via the Liquid 
 
 `site.collectionName` will return an array of all items belonging to a specific collection. `posts` being nothing else than a collection that Jekyll creates by default, you can access all posts using `site.posts`. For example, if you defined a `projects` collection, you would loop over your projects using the following code:
 
-```liquid
+```Liquid
 {% for project in site.projects %}
   <h2>{{ project.title }}</h2>
 {% else %}
@@ -253,9 +255,9 @@ When it runs, Jekyll makes a bunch of variables available to you via the Liquid 
 {% endfor %}
 ```
 
-As you can see, variables defined either via individual YAML Front Matter or via YAML Front Matter defaults can be accessed using dot notation in for loops. So, if you defined a `summary` variable in the YAML Front Matter of all your projects, you can access it using `project.summary`. The `project.url` variable is automatically created by Jekyll based on the permalink pattern you defined for items in your collection, either in via individual YAML Front Matter or via YAML Front Matter defaults in your `_config.yaml` file.
+As you can see, variables defined either via individual YAML Front Matter or via YAML Front Matter defaults can be accessed using dot notation in for loops.
 
-```liquid
+```Liquid
 {% for project in site.projects %}
   <h2><a href="{{ project.url }}">{{ project.title }}</a></h2>
   <p>{{ project.summary }}</p>
@@ -263,6 +265,8 @@ As you can see, variables defined either via individual YAML Front Matter or via
   <p>Sorry, I cannot find any project</p>
 {% endfor %}
 ```
+
+The `summary` variable defined in the YAML Front Matter of all projects can be accessed using `project.summary`. The `project.url` variable is automatically created by Jekyll based on the permalink pattern defined for items in the projects collection, either via their individual YAML Front Matter or via YAML Front Matter defaults in the `_config.yaml` file.
 
 Jekyll will also give you access to other global variables related to your pages, posts and collections. Here are the ones you will probably be using the most:
 
@@ -364,22 +368,22 @@ As said earlier, any variable defined in the child template will be available in
 
 Liquid and Jekyll also let you use includes to store bits of code and use them repeatedly. By default, Jekyll will look for your includes files in the `_includes` directory. That behaviour can be changed using your `_config.yaml` file and the `includes_dir: ./_includes` configuration variable.
 
-```liquid
+```Liquid
 {% include sidebar.html %}
 ```
 
 You can also pass variable to included files:
 
-```liquid
+```Liquid
 {% include sidebar.html searchWidget=true %}
 {% include sidebar.html searchWidget=page.search %}
 ```
 
 To use these variables in the context of your include file, you just have to use `include.mavariable`.
 
-```liquid
+```Liquid
 {% if include.searchWidget == true %}
-	... code of the search widget ...
+  ... code of the search widget ...
 {% endif %}
 ```
 
@@ -387,15 +391,15 @@ To use these variables in the context of your include file, you just have to use
 
 Liquid allows you to use `for` loops, which come in handy to loop through your arrays and hashes. For example, to display the title of all the `_posts` in your site, you could use the following `for` loop.
 
-```liquid
+```Liquid
 {% for item in site.posts %}
-	{{ item.title }}
+  {{ item.title }}
 {% endfor %}
 ```
 
 If you want to just display the last couple of posts, you have to use the `limit` parameter.
 
-```liquid
+```Liquid
 {% for item in site.posts limit:2 %}
  {{ item.title }}
 {% endfor %}
@@ -403,7 +407,7 @@ If you want to just display the last couple of posts, you have to use the `limit
 
 If you want to omit the first two posts, you can use the `offset` parameter.
 
-```liquid
+```Liquid
 {% for item in site.posts offset:2 %}
  {{ item.title }}
 {% endfor %}
@@ -411,23 +415,23 @@ If you want to omit the first two posts, you can use the `offset` parameter.
 
 Liquid also allows you to use common control structures like [`if`](https://github.com/shopify/liquid/wiki/Liquid-for-Designers#if--else) or [`case`](https://github.com/shopify/liquid/wiki/Liquid-for-Designers#case-statement) in your templates.
 
-```liquid
+```Liquid
 {% if user.age > 18 %}
-	<p>Would you like a beer ?</p>
+  <p>Would you like a beer ?</p>
 {% else %}
-	<p>We have orange juice, limonade, etc.</p>
+  <p>We have orange juice, limonade, etc.</p>
 {% endif %}
 ```
 
 Coupled to a `for` loop and to [loop variables](https://github.com/shopify/liquid/wiki/Liquid-for-Designers#for-loops), control structures allow you to output clean HTML code in all situations.
 
-```liquid
+```Liquid
 {% for item in site.posts %}
-	{% if foorloop.first %}<ul>{% endif %}
-		{{ item.title }}
-	{% if foorloop.last %}</ul>{% endif %}
+  {% if foorloop.first %}<ul>{% endif %}
+    {{ item.title }}
+  {% if foorloop.last %}</ul>{% endif %}
 {% else %}
-	<p>No blogposts found</p>
+  <p>No blogposts found</p>
 {% endfor %}
 ```
 
@@ -435,42 +439,42 @@ Coupled to a `for` loop and to [loop variables](https://github.com/shopify/liqui
 
 Let's start with `assign`, a tag allowing you to simply create a variable and assign a value to it.
 
-```liquid
+```Liquid
 {% assign blogpostsPerTitle = site.posts | sort: 'title' %}
 
 {% for item in blogpostsPerTitle reversed %}
-	{% if foorloop.first %}<ul>{% endif %}
-		{{ item.title }}
-	{% if foorloop.last %}</ul>{% endif %}
+  {% if foorloop.first %}<ul>{% endif %}
+    {{ item.title }}
+  {% if foorloop.last %}</ul>{% endif %}
 {% else %}
-	<p>No blogposts found</p>
+  <p>No blogposts found</p>
 {% endfor %}
 ```
 
 In this case, combining an alphabetical sorting on the title and the `reversed` parameter is only made possible by dividing the process in two distinct steps using `assign`. Here is another example combining various filters and using the `limit` parameter. Thanks to `assign` the code remains very legible.
 
-```liquid
+```Liquid
 {% assign blogpostsPerTitle = site.posts | sort: 'title' | reverse %}
 
 {% for item in blogpostsPerTitle limit:2 %}
-	{% if foorloop.first %}<ul>{% endif %}
-		{{ item.title }}
-	{% if foorloop.last %}</ul>{% endif %}
+  {% if foorloop.first %}<ul>{% endif %}
+    {{ item.title }}
+  {% if foorloop.last %}</ul>{% endif %}
 {% else %}
-	<p>No blogposts found</p>
+  <p>No blogposts found</p>
 {% endfor %}
 ```
 
 As the name suggests, `capture` allows you to capture various strings and to store them in a variable.
 
-```liquid
+```Liquid
 {% capture fullName %}{{ item.name | capitalize }} {{ item.surname | capitalize }}{% endcapture %}
 ```
 
 That type of functionality can be very useful in certain situations, for example when you have to create a yearly archive or your posts:
 
-```liquid
-{% assign allPosts = site.posts | sort: 'post.date' %}
+```Liquid
+{% assign allPosts = site.posts | sort:"post.date" %}
 {% for item in allPosts %}
 
   {% if forloop.first %}<ul>{% endif %}
@@ -506,7 +510,7 @@ Here are some examples for the `group_by` and `sort` filters:
 
 `group_by` and nested for loops will for example allow you to easily group your posts by one of their properties. For example, if each of your posts has a `postType` variable in their YAML Front Matter, you can easily create an archive of your posts grouped per type.
 
-```liquid
+```Liquid
 <h2>Archive per type</h2>
 
 {% assign postsByTypes = site.posts | group_by: "postType" %}
@@ -514,24 +518,24 @@ Here are some examples for the `group_by` and `sort` filters:
 {% for type in postsByTypes %}
   <h3>{{ type.name }}</h3>
   {% for item in type.items %}
-		{% if forloop.first %}<ul>{% endif %}
-    	<li>{{ item.title }}</li>
-		{% if forloop.last %}</ul>{% endif %}
+    {% if forloop.first %}<ul>{% endif %}
+      <li>{{ item.title }}</li>
+    {% if forloop.last %}</ul>{% endif %}
   {% endfor %}
 {% endfor %}
 ```
 
 The `where` filter will allow you to filter all elements of an array. An example would be to only display the posts by one specific author. In order for this code to work, you obviously need an author to be defined for your posts, either in the YAML Front Matters of your posts, or via YAML Front Matter Defaults in your `_config.yaml`.
 
-```liquid
-<h2>Post by author</h2>
+```Liquid
+<h2>Posts by author</h2>
 
-{% assign postsByAuthor = site.posts | where: 'author','Gengis Khan' %}
+{% assign postsByAuthor = site.posts | where:"author","Gengis Khan" %}
 
 {% for item in postsByAuthor %}
-	{% if forloop.first %}<ul>{% endif %}
-  	<li>{{ item.title }}</li>
-	{% if forloop.last %}</ul>{% endif %}
+  {% if forloop.first %}<ul>{% endif %}
+    <li>{{ item.title }}</li>
+  {% if forloop.last %}</ul>{% endif %}
 {% endfor %}
 ```
 
@@ -556,7 +560,7 @@ As we said earlier, Jekyll allows you to easily manipulate data files written in
 ```
 
 **HTML**: *_includes/mainnav.html*
-```liquid
+```Liquid
 {% assign navData = site.data.nav %}
 
 {% for item in navData %}

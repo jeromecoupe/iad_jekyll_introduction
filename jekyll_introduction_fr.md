@@ -2,7 +2,7 @@
 
 ## Introduction
 
-[Jekyll](http://jekyllrb.com) est un générateur de sites statiques créé par [Tom Preston Werner](http://tom.preston-werner.com/). Jekyll est un projet open source maintenu par [Parker Moore](https://byparker.com/) et la communauté.
+[Jekyll](http://jekyllrb.com) est un générateur de sites statiques créé par [Tom Preston Werner](http://tom.preston-werner.com/). Jekyll est un projet open source maintenu par un Core Team dirigé par [Parker Moore](https://byparker.com/) et par la communauté.
 
 Jekyll vous permet de développer des sites basés sur des templates dynamiques (codés avec [Liquid](http://liquidmarkup.org/)) et des fichiers de contenus (YAML / Markdown / HTML / JSON / CSV). Jekyll n'utilise pas de base de données. Sur base de ces fichiers, Jekyll va générer un site entièrement statique que vous pourrez ensuite déployer sur n'importe quel serveur web ou sur [Github Pages](https://pages.github.com/).
 
@@ -16,11 +16,11 @@ Les avantages des générateurs de sites statiques peuvent être résumés comme
 
 ## Installation
 
-Pour installer Jekyll, il nous faut d'abord installer Ruby. Voici une petite marche à suivre.
+Pour installer Jekyll, il nous faut d'abord installer Ruby.
 
 ### Installation de Ruby
 
-Ruby est installé par défaut sur les Mac. Voici cependant la procédure à suivre pour installer Ruby ou mettre à jour la version dont vous disposez.
+Ruby est installé par défaut sur les Mac. Voici cependant une marche à suivre pour installer Ruby ou mettre à jour la version dont vous disposez.
 
 Si vous travaillez sur Windows, utiliser [Ruby Installer](http://rubyinstaller.org) et sans doute le plus facile. Il suffit ensuite d'installer la gem Jekyll comme spécifié en infra.
 
@@ -83,8 +83,8 @@ Jekyll devrait vous créer l'arborescence suivante (nous y reviendrons dans le d
 - **_config.yaml** : fichier de configuration principal de votre site Jekyll
 - **_includes** : contient vos includes
 - **_layouts** : contient vos fichiers de layout
-	- **default.html** : layout par défaut
-	- **post.html** : layout utilisé pour vos posts
+  - **default.html** : layout par défaut
+  - **post.html** : layout utilisé pour vos posts
 - **_posts** : dossier contenant vos blogposts
 - **_sass** : contient vos fichiers .scss
 - **css** : contient votre fichier .scss maître qui importe les autres
@@ -92,7 +92,7 @@ Jekyll devrait vous créer l'arborescence suivante (nous y reviendrons dans le d
 - **index.html** : la homepage de votre site
 - **feed.xml** : un template de flux RSS
 
-### Concepts de base et fonctionnement
+### Concepts et commandes de base
 
 Jekyll fonctionne en parcourant cette arborescence pour générer un site statique sur base des fichiers et dossiers trouvés. Ce site statique est généré dans le répertoire `_site` par défaut.
 
@@ -100,6 +100,8 @@ Jekyll fonctionne en parcourant cette arborescence pour générer un site statiq
 - les dossiers et fichiers dont le nom commence par un underscore ne seront pas transférés dans le dossier `_site`, tandis que les dossiers et fichiers dont le nom ne commence pas par un underscore seront transférés dans le dossier `_site`.
 
 Une fois dans le dossier de votre projet, la commande `jekyll build` est utilisée pour générer votre site. Si vous souhaitez que ce site soit généré à nouveau automatiquement dès que Jekyll détecte des changements dans votre projet, utilisez la commande `jekyll build --watch`.
+
+Vous pouvez également utiliser `jekyll serve` pour vous permettre de visualiser votre site sur un serveur de dévelopement à l'adresse `http://localhost:4000/` (la régénaration automatique est activée par défaut).
 
 Depuis Jekyll 3.0.0, vous pouvez utiliser `jekyll build --incremental` pour régénérer votre site de façon incrémentale et gagner du temps, ainsi que `jekyll build --profiler` pour faire tourner un profiler vous montrant le temps de build pour chaque ressource.
 
@@ -133,15 +135,15 @@ Vous pouvez accéder à l'ensemble de ces variables via l'objet `page` en syntax
 
 ```yaml
 collections:
-	macollection:
+  macollection:
 ```
 
 Vous pouvez spécifier pour chaque collection si les fichiers qui la composent vont générer un output (un fichier propre) après traitement par Jekyll. Vous pouvez définir l'URL de ces fichiers via la variable `permalink` (voir infra). Les fichiers d'une collection vont également générer automatiquement une variable `date` si vos noms de fichiers commencent par une date.
 
 ```yaml
 collections:
-	macollection:
-		output: true
+  macollection:
+    output: true
     permalink: /collection/:year/:title
 ```
 
@@ -149,7 +151,7 @@ Des caractéristiques communes pour tous les fichiers d'une collection peuvent �
 
 #### Posts : une collection particulière
 
-[Les posts](http://jekyllrb.com/docs/posts/) viennent du fait que Jekyll a été conçu à la base comme un outil de blogging. Toutes les installations de Jekyll comprennent donc une collection par défaut nommée `_posts` qui est définie implicitement par Jekyll.
+[Les posts](http://jekyllrb.com/docs/posts/) viennent du fait que Jekyll a été conçu à la base comme un outil de blogging. Toutes les installations de Jekyll comprennent donc une collection par défaut nommée `_posts` qui est définie implicitement par Jekyll. Cette collection `posts` possède encore aujourd'hui un statut particulier et des fonctionnalités qui lui sont propres et qui ne sont pas disposnibles pour les autres collections. Un exemple est la gestion des categories et des tags.
 
 ### YAML Front Matter et variables de page
 
@@ -171,9 +173,9 @@ title: mon titre
 summary: ceci est un résumé
 maVariable: test
 maListe:
-	- item 1
-	- item 2
-	- item 3
+  - item 1
+  - item 2
+  - item 3
 ---
 ## Titre de second niveau
 
@@ -191,23 +193,23 @@ Vous pouvez ainsi spécifier facilement la valeur par défaut pour les variables
 
 ```yaml
 defaults:
-	scope:
-		path: "/about"
-	values:
+  scope:
+    path: "/about"
+  values:
     layout: "default"
-		maVariable: maValeur
+    maVariable: maValeur
 ```
 
 ou
 
 ```yaml
 defaults:
-	scope:
-		path: "" # l'ensemble des fichers de votre projet
-		type: "portfolio" # les fichiers de la collection portfolio
-	values:
+  scope:
+    path: "" # l'ensemble des fichers de votre projet
+    type: "portfolio" # les fichiers de la collection portfolio
+  values:
     layout: "default"
-		maVariable: maValeur
+    maVariable: maValeur
 ```
 
 ### Data
@@ -231,22 +233,21 @@ Liquid comporte deux principaux types de tags :
 1. Les tags d'affichage `{{ affichage }}` qui permettent d'écrire des variables dans vos templates.
 2. Les tags de logique ou d'exécution `{% logique %}`. Par exemple `{% if %}`, `{% endif %}` ou `{% assign mavariable = site.macollection %}`.
 
-<<<<<<< HEAD
 ### Accéder à vos données
 
 Lorsque Jekyll tourne, il vous créée une série de variables auxquelles vous avez accès via Liquid.
 
 #### Variables globales
 
-`site`: utilisée principalement pour accéder aux tableaux reprennant vos pages, posts et collections. Egalement utilisé pour accéder aux variables spécifiées dans votre fichier `_config.yaml`. Voir plus bas.
-`page`: utilisée principalement pour accéder aux variables spécifiées via les YAML Front Matters de vos fichiers individuels ou via les YAML Front Matter par défaut spécifiées dans votre fichier `_config.yaml`.
-`_content`: variable spéciale utilisée uniquement dans les fichiers de layout. Cette variable sera remplacée par le contenu post, de la page ou de l'item membre d'une collection auquel le fichier de layout est appliqué. Voir plus bas.
+- `site`: utilisée principalement pour accéder aux tableaux reprennant vos pages, posts et collections. Egalement utilisé pour accéder aux variables spécifiées dans votre fichier `_config.yaml`. Voir plus bas.
+- `page`: utilisée principalement pour accéder aux variables spécifiées via les YAML Front Matters de vos fichiers individuels ou via les YAML Front Matter par défaut spécifiées dans votre fichier `_config.yaml`.
+- `_content`: variable spéciale utilisée uniquement dans les fichiers de layout. Cette variable sera remplacée par le contenu post, de la page ou de l'item membre d'une collection auquel le fichier de layout est appliqué. Voir plus bas.
 
 #### Variables liées aux collections, pages et data
 
-`site.maCollection` retournera un tableau d'items appartennant à une collection spécifique. `posts` n'est rien d'autre qu'une collection spécialisée que Jekyll créée par défaut. Vous pouvez donc accéder à un tableau de l'ensemble de vos posts en utilisant `site.posts`. Si vous avez défini une collection `projets`, vous pourriez boucler sur les items de cette collection en utilisant le code suivant:
+`site.maCollection` retournera un tableau d'items appartenant à une collection spécifique. `posts` n'est rien d'autre qu'une collection spécialisée que Jekyll créée par défaut. Vous pouvez donc accéder à un tableau de l'ensemble de vos posts en utilisant `site.posts`. Si vous avez défini une collection `projets`, vous pourriez boucler sur les items de cette collection en utilisant le code suivant:
 
-```liquid
+```Liquid
 {% for project in site.projects %}
   <h2>{{ project.title }}</h2>
 {% else %}
@@ -254,9 +255,9 @@ Lorsque Jekyll tourne, il vous créée une série de variables auxquelles vous a
 {% endfor %}
 ```
 
-Les variables définies soit via les YAML Front Matter (individuals ou par défaut) peuvent être accédées via une syntaxe pointée dans les boucles `for`. Par exmeple, si vous avez défini une variable `summary` dans le YAML Front Matter de tous vos projets, vous pouvez y accéder dans une boucle `for` en utilisant `project.summary`. La variable `project.url` est automatiquement créée par Jekyll sur base du pattern de permalink défini pour les items de votre collection, soit via leurs YAML Front Matter individuels, soit via les YAML Front Matter par défaut dans votre fichier `_config.yaml`.
+Les variables définies via les YAML Front Matter (individuels ou par défaut) sont accessibles via une syntaxe pointée dans les boucles `for`.
 
-```liquid
+```Liquid
 {% for project in site.projects %}
   <h2><a href="{{ project.url }}">{{ project.title }}</a></h2>
   <p>{{ project.summary }}</p>
@@ -265,26 +266,27 @@ Les variables définies soit via les YAML Front Matter (individuals ou par défa
 {% endfor %}
 ```
 
+La variable `summary` dans le YAML Front Matter de tous les projets, est accessible dans cette boucle `for` en utilisant `project.summary`. La variable `project.url` est automatiquement créée par Jekyll sur base du pattern de permalink défini pour les items de cette collection, soit via leurs YAML Front Matter individuels, soit via les YAML Front Matter par défaut dans le fichier `_config.yaml`.
+
 Jekyll vous donne également accès à d'autres variables globales liées à vos pages, collections et data. Voici sans doute celles que vous utiliserez le plus:
 
 - `site.pages`: un tableau de toutes vos pages.
 - `site.collections`: un tableau de toutes vos collections et de [leurs attributs](http://jekyllrb.com/docs/collections/#collections)
-- `site.data`: un tableau contenant les données définie dans vos fichiers de données placés dans le dossier `_data` de votre installation. Pour accéder aux données dans un fichier individuel, vous pouvez simplement utiliser `site.data.nomdufichier`.
-- `site.categories.CATEGORY`: un tableau de tous les posts appartennant à la catégorie CATEGORY. `site.categories.work` wvous donnera accès à un tableau de tous les posts dans la catégorie "work". Ceci est uniquement disponible pour les posts et n'est pas disponible pour les items des autres collections.
+- `site.data`: un tableau contenant les données définies dans vos fichiers de données placés dans le dossier `_data` de votre installation. Pour accéder aux données dans un fichier individuel, vous pouvez simplement utiliser `site.data.nomdufichier`.
+- `site.categories.CATEGORY`: un tableau de tous les posts appartenant à la catégorie CATEGORY. `site.categories.work` vous donnera accès à un tableau de tous les posts dans la catégorie "work". Ceci est uniquement disponible pour les posts et n'est pas disponible pour les items des autres collections.
 - `site.tags.TAG`: un tableau de tous les posts auxquels le tag TAG est appliqué. `site.tags.jekyll` vous donnera accès à un tableau de tous les posts auxquels le tag "jekyll" est appliqué. Ceci est uniquement disponible pour les posts et n'est pas disponible pour les items des autres collections.
 
 #### Variables dans les fichiers individuels
 
-
-Vous pouvez facielement accéder aux variables définies dans vos YAML Front Matter (individuels ou par défaut) en utilisant la variable `page` et une syntaxe pointée. Si vous avez défini une variable `test` dans le YAML Front Matter d'une page, d'un post ou d'un item de collection, vous pouvez y accéder via `page.test`. Ces variables seront également disponibles dans les fichiers de layout références dans vos pages, posts et items de collections.
+Vous pouvez facilement accéder aux variables définies dans vos YAML Front Matter (individuels ou par défaut) en utilisant la variable `page` et une syntaxe pointée. Si vous avez défini une variable `test` dans le YAML Front Matter d'une page, d'un post ou d'un item de collection, vous pouvez y accéder via `page.test`. Ces variables seront également disponibles dans les fichiers de layout référencés dans vos pages, posts et items de collections.
 
 En plus des variables que vous définissez, Jekyll créée [automatiquement certaines variables](http://jekyllrb.com/docs/variables/#page-variables) pour vos pages, posts et items de collection. Voici les principales:
 
-- `page.title`: le titre du post, de la page ou de l'item appartennant à une collection
+- `page.title`: le titre du post, de la page ou de l'item appartenant à une collection
 - `page.content`: le contenu de la page. Ce que la variable spéciale `{{ content }}` affichera dans un fichier de layout.
 - `page.date`: la date assignée au post ou à l'item d'une collection. Peut être spécifiée soit en utilisant le nom de fichier, soit via les variables de YAML Front Matter (individuels ou par défaut)
 - `page.categories`: la liste des catégories assignées au post. Ceci est uniquement disponible pour les posts et n'est pas disponible pour les items des autres collections.
-- `page.tags`: la liste des tags assignés au post.C eci est uniquement disponible pour les posts et n'est pas disponible pour les items des autres collections.
+- `page.tags`: la liste des tags assignés au post. Ceci est uniquement disponible pour les posts et n'est pas disponible pour les items des autres collections.
 
 #### Variables de configuration
 
@@ -365,22 +367,22 @@ layout: default
 
 Liquid et Jekyll vous permettent également d'utiliser des includes pour stocker les morceaux de code appelés à se répéter. Par défaut, Jekyll cherchera vos fichiers includes dans le répertoire `_includes`. Cela peut être modifié dans votre fichier `_config.yaml` via la variable `includes_dir: ./_includes`.
 
-```liquid
+```Liquid
 {% include sidebar.html %}
 ```
 
 Vous pouvez également passer des variables à vos includes.
 
-```liquid
+```Liquid
 {% include sidebar.html searchWidget="true" %}
 {% include sidebar.html searchWidget=page.search %}
 ```
 
 Pour les récupérer dans le cadre de votre fichier include, il suffit d'utiliser `include.mavariable`
 
-```liquid
+```Liquid
 {% if include.searchWidget == "true" %}
-	... code du search widget ...
+  ... code du search widget ...
 {% endif %}
 ```
 
@@ -388,15 +390,15 @@ Pour les récupérer dans le cadre de votre fichier include, il suffit d'utilise
 
 Liquid vous permet d'utiliser des boucles `for`, ce qui est particulièrement utile pour traiter vos objets et autres tableaux. Par exemple, pour afficher l'ensemble des `posts` de votre site, il suffit d'utiliser la syntaxe suivante:
 
-```liquid
+```Liquid
 {% for item in site.posts %}
-	{{ item.title }}
+  {{ item.title }}
 {% endfor %}
 ```
 
 Si vous souhaitez vous limiter aux deux derniers posts, vous pouvez utiliser le paramètre `limit`.
 
-```liquid
+```Liquid
 {% for item in site.posts limit:2 %}
  {{ item.title }}
 {% endfor %}
@@ -404,7 +406,7 @@ Si vous souhaitez vous limiter aux deux derniers posts, vous pouvez utiliser le 
 
 Si vous souhaitez omettre les deux premiers posts de votre boucle, vous pouvez utiliser le paramètre `offset`.
 
-```liquid
+```Liquid
 {% for item in site.posts offset:1 %}
  {{ item.title }}
 {% endfor %}
@@ -412,23 +414,23 @@ Si vous souhaitez omettre les deux premiers posts de votre boucle, vous pouvez u
 
 Liquid vous permet également d'utiliser les structures de contrôle classiques telles que [`if`](https://github.com/shopify/liquid/wiki/Liquid-for-Designers#if--else) ou [`case`](https://github.com/shopify/liquid/wiki/Liquid-for-Designers#case-statement) dans le cadre de vos templates.
 
-```liquid
+```Liquid
 {% if user.age > 18 %}
-	<p>Would you like a beer ?</p>
+  <p>Would you like a beer ?</p>
 {% else %}
-	<p>We have orange juice, limonade, etc.</p>
+  <p>We have orange juice, limonade, etc.</p>
 {% endif %}
 ```
 
 Couplées à une boucle `for` et aux [variables de loop](https://github.com/shopify/liquid/wiki/Liquid-for-Designers#for-loops), les structures de contrôle vous permettent d'avoir un code HTML propre.
 
-```liquid
+```Liquid
 {% for item in site.posts %}
-	{% if foorloop.first %}<ul>{% endif %}
-		{{ item.title }}
-	{% if foorloop.last %}</ul>{% endif %}
+  {% if foorloop.first %}<ul>{% endif %}
+    {{ item.title }}
+  {% if foorloop.last %}</ul>{% endif %}
 {% else %}
-	<p>No blogposts found</p>
+  <p>No blogposts found</p>
 {% endfor %}
 ```
 
@@ -436,39 +438,64 @@ Couplées à une boucle `for` et aux [variables de loop](https://github.com/shop
 
 Commençons par le tag `assign` qui vous permet simplement de créer une variable et d'y d'assigner une valeur.
 
-```liquid
+```Liquid
 {% assign blogpostsPerTitle = site.posts | sort: 'title' %}
 
 {% for item in blogpostsPerTitle reversed %}
-	{% if foorloop.first %}<ul>{% endif %}
-		{{ item.title }}
-	{% if foorloop.last %}</ul>{% endif %}
+  {% if foorloop.first %}<ul>{% endif %}
+    {{ item.title }}
+  {% if foorloop.last %}</ul>{% endif %}
 {% else %}
-	<p>No blogposts found</p>
+  <p>No blogposts found</p>
 {% endfor %}
 ```
 
 Dans ce cas précis, combiner un classement alphabétique sur le titre et le paramètre `reversed` n'est possible qu'en faisant les choses en deux étapes en utilisant `assign`. Voici également une autre application combinant plusieurs filtres et utilisant le paramètre `limit`. Grâce à `assign`, le code reste très lisible.
 
-```liquid
+```Liquid
 {% assign blogpostsPerTitle = site.posts | sort: 'title' | reverse %}
 
 {% for item in blogpostsPerTitle limit:2 %}
-	{% if foorloop.first %}<ul>{% endif %}
-		{{ item.title }}
-	{% if foorloop.last %}</ul>{% endif %}
+  {% if foorloop.first %}<ul>{% endif %}
+    {{ item.title }}
+  {% if foorloop.last %}</ul>{% endif %}
 {% else %}
-	<p>No blogposts found</p>
+  <p>No blogposts found</p>
 {% endfor %}
 ```
 
 `capture` permet, comme son nom l'indique, de capturer plusieurs chaînes de caractères et de les stocker dans une variable. Ce genre de fonctionnalités peut s'avérer très utile en combinaison avec l'utilisation de plusieurs boucles.
 
-```liquid
+```Liquid
 {% capture fullName %}{{ item.name | capitalize }} {{ item.surname | capitalize }}{% endcapture %}
 ```
 
-Cette fonctionnalité peut être très utilse dans certaines situations, par
+Cette fonctionnalité peut être très utilse dans certaines situations, par exemple pour créer une archive de vos posts classés par année.
+
+That type of functionality can be very useful in certain situations, for example when you have to create a yearly archive or your posts:
+
+```Liquid
+{% assign allPosts = site.posts | sort: 'post.date' %}
+{% for item in allPosts %}
+
+  {% if forloop.first %}<ul>{% endif %}
+
+  {% capture currentYear %}{{ item.date | date: "%Y" }}{% endcapture %}
+
+    {% if postYear != currentYear %}
+      {% if forloop.index != 1 %}</ul>{% endif %}
+      <h2>{{ currentYear }}</h2>
+      <ul>
+    {% endif %}
+
+    <li>{{ item.title }}</li>
+
+    {% capture postYear %}{{ item.date | date: "%Y" }}{% endcapture %}
+
+  {% if forloop.last %}</ul>{% endif %}
+
+{% endfor %}
+```
 
 ### Filtres: `sort`, `group_by` et `where`
 
@@ -480,11 +507,11 @@ Jekyll possède également quelques filtres qui lui sont propres. Parmi eux, tro
 - `group_by` : permet de grouper un tableau ou un hash par l'une de ses variables ou keys.
 - `where` : permet de filtrer les éléments d'un tableau ou d'un hash à l'aide d'une de ses valeurs.
 
-Voici quelques exemples d'applications pour les filtres `group_by` et `sort` :
+Voici quelques exemples d'applications pour les filtres `group_by` et `where` :
 
 `group_by` et des boucles imbriquées permettent par exemple de grouper vos posts par l'une de leurs propriétés. Par exemple, si chacun de vos posts possède une variable `postType` dans son YAML Front Matter, voici comment créer une archive par type.
 
-```liquid
+```Liquid
 <h2>Archive par type</h2>
 
 {% assign postsByTypes = site.posts | group_by: "postType" %}
@@ -492,24 +519,24 @@ Voici quelques exemples d'applications pour les filtres `group_by` et `sort` :
 {% for type in postsByTypes %}
   <h3>{{ type.name }}</h3>
   {% for item in type.items %}
-		{% if forloop.first %}<ul>{% endif %}
-    	<li>{{ item.title }}</li>
-		{% if forloop.last %}</ul>{% endif %}
+    {% if forloop.first %}<ul>{% endif %}
+      <li>{{ item.title }}</li>
+    {% if forloop.last %}</ul>{% endif %}
   {% endfor %}
 {% endfor %}
 ```
 
 Le filtre `where` va permettre de filtrer les éléments d'un array, par exemple pour n'afficher que les posts écrit par un auteur. Pour que cela fonctionne, il faut évidemment qu'un auteur soit défini dans chacun de vos posts, soit dans chaque YAML Front Matter, soit via les YAML Front Matter Defaults de votre fichier `_config.yaml`.
 
-```liquid
+```Liquid
 <h2>Post par auteur</h2>
 
-{% assign postsByAuthor = site.posts | where: 'author','Gengis Khan' %}
+{% assign postsByAuthor = site.posts | where:"author","Gengis Khan" %}
 
 {% for item in postsByAuthor %}
-	{% if forloop.first %}<ul>{% endif %}
-  	<li>{{ item.title }}</li>
-	{% if forloop.last %}</ul>{% endif %}
+  {% if forloop.first %}<ul>{% endif %}
+    <li>{{ item.title }}</li>
+  {% if forloop.last %}</ul>{% endif %}
 {% endfor %}
 ```
 
@@ -534,7 +561,7 @@ Comme dit plus haut, Jekyll vous permet de manipuler à l'aide de Liquid des fic
 ```
 
 **nav**: *_includes/mainnav.html*
-```liquid
+```Liquid
 {% assign navData = site.data.nav %}
 
 {% for item in navData %}
