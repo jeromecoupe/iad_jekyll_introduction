@@ -4,11 +4,15 @@
 
 [Jekyll](http://jekyllrb.com) est un générateur de sites statiques créé par [Tom Preston Werner](http://tom.preston-werner.com/). Jekyll est un projet open source maintenu par [Parker Moore](https://byparker.com/) et la communauté.
 
-Jekyll vous permet de développer des sites basés sur des templates dynamiques (codés avec [Liquid](http://liquidmarkup.org/)) et des fichiers de contenus (YAML / Markdown / HTML / JSON / CSV). Sur base de ces fichiers, Jekyll va générer un site entièrement statique que vous pourrez ensuite déployer sur n'importe quel serveur web ou sur [Github Pages](https://pages.github.com/).
+Jekyll vous permet de développer des sites basés sur des templates dynamiques (codés avec [Liquid](http://liquidmarkup.org/)) et des fichiers de contenus (YAML / Markdown / HTML / JSON / CSV). Jekyll n'utilise pas de base de données. Sur base de ces fichiers, Jekyll va générer un site entièrement statique que vous pourrez ensuite déployer sur n'importe quel serveur web ou sur [Github Pages](https://pages.github.com/).
 
 Jekyll tourne sous [Ruby](https://www.ruby-lang.org). Le workflow le plus répandu consiste à générer son site localement et à mettre en ligne les fichiers statiques ainsi générés.
 
-Si vous utilisez GitHub Pages, il vous suffira de mettre en ligne l'ensemble de vos fichiers, une instance de Jekyll tournant sur Github se chargera de générer votre site pour vous.  
+Les avantages des générateurs de sites statiques peuvent être résumés comme suit:
+
+- Tout est basé sur des fichiers. Votre site peut être entièrement géré par un système de version control comme Git
+- De simples fichiers statiques sont incoyablement faciles à héberger sur n'importe quelle infrastructure et rendent votre site très rapide à charger.
+- Votre infrastructre serveur reste très simple et offres moins de possibilités aux hackers qu'un site dynamique.
 
 ## Installation
 
@@ -17,6 +21,8 @@ Pour installer Jekyll, il nous fait d'abord installer Ruby. Voici une petite mar
 ### Installation de Ruby
 
 Ruby est installé par défaut sur les mac. Voici cependant la procédure à suivre pour installer Ruby ou mettre à jour la version dont vous disposez.
+
+Si vous travaillez sur Windows, utiliser [Ruby Installer](http://rubyinstaller.org) et sans doute le plus facile. Il suffit ensuite d'installer la gem Jekyll comme spécifié en infra.
 
 #### Installation de Homebrew
 
@@ -28,7 +34,7 @@ Faites ensuite un petit `brew doctor` pour vérifier que tout est en ordre. Si v
 
 #### Installation de RVM
 
-La méthode conseillée sur mac est d'installer RVM (Ruby Version Manager) qui vous permettra facilement de manager Ruby sur votre machine.
+La méthode conseillée sur mac est d'installer RVM (Ruby Version Manager) qui vous permettra facilement de gérer différentes versions de Ruby sur votre machine (ce qui peut s'avérer pratique, faites-moi confiance).
 
 `\curl -#L https://get.rvm.io | bash -s stable --ruby`
 
@@ -93,7 +99,7 @@ Jekyll fonctionne en parcourant cette arborescence pour générer un site statiq
 - Jekyll va traiter tous les fichiers contenant un YAML Front Matter (y compris un YAML Front Matter vide), les sauver temporairement et les rendre utilisables par Liquid et les tags Jekyll.
 - les dossiers et fichiers dont le nom commence par un underscore ne seront pas transférés dans le dossier `_site`, tandis que les dossiers et fichiers dont le nom ne commence pas par un underscore seront transférés dans le dossier `_site`.
 
-La commande `jekyll build` est utilisée pour générer votre site. Si vous souhaitez que ce site soit généré à nouveau automatiquement dès que Jekyll détecte des changements dans votre projet, utilisez la commande `jekyll build --watch`.
+Une fois dans le dossier de votre projet, la commande `jekyll build` est utilisée pour générer votre site. Si vous souhaitez que ce site soit généré à nouveau automatiquement dès que Jekyll détecte des changements dans votre projet, utilisez la commande `jekyll build --watch`.
 
 Depuis Jekyll 3.0.0, vous pouvez utiliser `jekyll build --incremental` pour régénérer votre site de façon incrémentale et gagner du temps, ainsi que `jekyll build --profiler` pour faire tourner un profiler vous montrant le temps de build pour chaque ressource.
 
@@ -101,9 +107,9 @@ Depuis Jekyll 3.0.0, vous pouvez utiliser `jekyll build --incremental` pour rég
 
 Les [options de configuration globales](http://jekyllrb.com/docs/configuration/#global-configuration) de votre site sont stockées dans des variables définies dans le fichier `_config.yaml`.
 
-L'ensemble des variables définies dans le fichier `config.yaml` sont accessibles dans vos templates via l'objet `site` en syntaxe pointée. Vous pouvez par exemple accéder à la variable `title` de votre `config.yaml` en utilisant `site.title`
+L'ensemble des variables définies dans le fichier `_config.yaml` sont accessibles dans vos templates via l'objet `site` en syntaxe pointée. Vous pouvez par exemple accéder à la variable `title` de votre `config.yaml` en utilisant `site.title`
 
-Vous pouvez définir vos propres variables dans ce fichier. Elles seront alors accessibles dans vos templates via l'objet `site` en syntaxe pointée. Par exemple, si vous définissez une variable `test` dans le fichier `config.yaml`, vous pourrez y accéder dans vos templates en utilisant `site.test`.
+Vous pouvez définir vos propres variables dans ce fichier. Elles seront alors accessibles dans vos templates via l'objet `site` en syntaxe pointée. Par exemple, si vous définissez une variable `test` dans le fichier `_config.yaml`, vous pourrez y accéder dans vos templates en utilisant `site.test`.
 
 Certaines de ces options de configuration sont implicites ([spécifiées par défaut](http://jekyllrb.com/docs/configuration/)) mais peuvent être surdéterminées si besoin est.
 
@@ -112,8 +118,8 @@ Certaines de ces options de configuration sont implicites ([spécifiées par dé
 Jekyll vous propose différentes façons de créer vos données et de les structurer. Les trois outils principaux à votre disposition sont:
 
 - **pages**: permettent de gérer contenus isolés, sans aucun lien logique avec d'autres (homepage, contact, etc.)
-- **collections**: permettent de gérer des contenus liés entre eux de façon logique, faisant partie d'un même ensemble. Les fichiers membres d'une collection peuvent éventuellement générer un fichier propre (output: true) et également avoir une URL (permalink).
-- **data**: permet de gérer des contenus structurés dans des formats tels que YAML ou JSON.
+- **collections**: permettent de gérer des contenus liés entre eux de façon logique à travers des séries de fichiers HTML ou Markdown. Les fichiers membres d'une collection peuvent éventuellement générer un fichier lorsque le site est généré (output: true) et également avoir une URL (permalink).
+- **data**: permet de gérer des contenus structurés dans des formats tels que YAML ou JSON. Ces données ne générerons pas de fichiers propres avec des URLs distinctes.
 
 ### Pages
 
@@ -123,7 +129,7 @@ Vous pouvez accéder à l'ensemble de ces variables via l'objet `page` en syntax
 
 ### Collections
 
-[Les collections](http://jekyllrb.com/docs/collections/) permettent de créer différents types de contenus liés entre eux de façon logique. Pour créer une collection, il suffit de créer un dossier nommé `_macollection` et puis de définir `macollection` dans votre fichier `config.yaml`. Le nom du dossier sans tenir compte du caractère `_` doit être identique au nom de la collection spécifié dans le fichier `_config.yaml`.
+[Les collections](http://jekyllrb.com/docs/collections/) permettent de créer différents types de contenus liés entre eux de façon logique. Pour créer une collection, il suffit de créer un dossier nommé `_macollection` et puis de définir `macollection` dans votre fichier `_config.yaml`. Le nom du dossier sans tenir compte du caractère `_` doit être identique au nom de la collection spécifié dans le fichier `_config.yaml`.
 
 ```yaml
 collections:
@@ -136,6 +142,7 @@ Vous pouvez spécifier pour chaque collection si les fichiers qui la composent v
 collections:
 	macollection:
 		output: true
+    permalink: /collection/:year/:title
 ```
 
 Des caractéristiques communes pour tous les fichiers d'une collection peuvent être définies via des [variables YAML par défaut](http://jekyllrb.com/docs/configuration/#Front Matter-defaults) (voir infra).
@@ -187,7 +194,8 @@ defaults:
 	scope:
 		path: "/about"
 	values:
-		permalink: /blog/:year/:title
+    layout: "default"
+		maVariable: maValeur
 ```
 
 ou
@@ -198,7 +206,7 @@ defaults:
 		path: "" # l'ensemble des fichers de votre projet
 		type: "portfolio" # les fichiers de la collection portfolio
 	values:
-		permalink: /blog/:year/:title
+    layout: "default"
 		maVariable: maValeur
 ```
 
@@ -212,7 +220,7 @@ Maintenant que nous avons vu comment créer vos données dans Jekyll, voyons com
 
 ### Liquid comme langage de templating
 
-Jekyll utilise [Liquid](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers) comme langage de templating. Liquid à été créé par [Shopify](https://www.shopify.com/) pour permettre à ses utilisateurs d'appliquer leurs propres layouts à leurs projets de e-commerce.
+Jekyll utilise [Liquid](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers) comme langage de templating. Liquid à été créé par [Shopify](https://www.shopify.com/) pour permettre à ses utilisateurs de créer et d'appliquer leurs propres templates à leurs projets d'e-commerce.
 
 Liquid reste un langage très simple mais qui permet tout de même une grande souplesse d'utilisation. En plus des tags Liquid standards, Jekyll offre aussi quelques [filtres](http://jekyllrb.com/docs/templates/#filters) et [tags](http://jekyllrb.com/docs/templates/#tags) qui lui sont propres.
 
@@ -222,6 +230,64 @@ Liquid comporte deux principaux types de tags:
 
 1. Les tags d'affichage `{{ affichage }}` qui permettent d'écrire des variables dans vos templates.
 2. Les tags de logique ou d'exécution `{% logique %}`. Par exemple `{% if %}`, `{% endif %}` ou `{% assign mavariable = site.macollection %}`
+
+### Accéder à vos données
+
+Lorsque Jekyll tourne, il vous créée une série de variables auxquelles vous avez accès via Liquid.
+
+#### Variables globales
+
+`site`: utilisée principalement pour accéder aux tableaux reprennant vos pages, posts et collections. Egalement utilisé pour accéder aux variables spécifiées dans votre fichier `_config.yaml`. Voir plus bas.
+`page`: utilisée principalement pour accéder aux variables spécifiées via les YAML Front Matters de vos fichiers individuels ou via les YAML Front Matter par défaut spécifiées dans votre fichier `_config.yaml`.
+`_content`: variable spéciale utilisée uniquement dans les fichiers de layout. Cette variable sera remplacée par le contenu post, de la page ou de l'item membre d'une collection auquel le fichier de layout est appliqué. Voir plus bas.
+
+#### Variables liées aux collections, pages et data
+
+`site.maCollection` retournera un tableau d'items appartennant à une collection spécifique. `posts` n'est rien d'autre qu'une collection spécialisée que Jekyll créée par défaut. Vous pouvez donc accéder à un tableau de l'ensemble de vos posts en utilisant `site.posts`. Si vous avez défini une collection `projets`, vous pourriez boucler sur les items de cette collection en utilisant le code suivant:
+
+```liquid
+{% for project in site.projects %}
+  <h2>{{ project.title }}</h2>
+{% else %}
+  <p>Sorry, I cannot find any project</p>
+{% endfor %}
+```
+
+Les variables définies soit via les YAML Front Matter (individuals ou par défaut) peuvent être accédées via une syntaxe pointée dans les boucles `for`. Par exmeple, si vous avez défini une variable `summary` dans le YAML Front Matter de tous vos projets, vous pouvez y accéder dans une boucle `for` en utilisant `project.summary`. La variable `project.url` est automatiquement créée par Jekyll sur base du pattern de permalink défini pour les items de votre collection, soit via leurs YAML Front Matter individuels, soit via les YAML Front Matter par défaut dans votre fichier `_config.yaml`.
+
+```liquid
+{% for project in site.projects %}
+  <h2><a href="{{ project.url }}">{{ project.title }}</a></h2>
+  <p>{{ project.summary }}</p>
+{% else %}
+  <p>Sorry, I cannot find any project</p>
+{% endfor %}
+```
+
+Jekyll vous donne également accès à d'autres variables globales liées à vos pages, collections et data. Voici sans doute celles que vous utiliserez le plus:
+
+- `site.pages`: un tableau de toutes vos pages.
+- `site.collections`: un tableau de toutes vos collections et de [leurs attributs](http://jekyllrb.com/docs/collections/#collections)
+- `site.data`: un tableau contenant les données définie dans vos fichiers de données placés dans le dossier `_data` de votre installation. Pour accéder aux données dans un fichier individuel, vous pouvez simplement utiliser `site.data.nomdufichier`.
+- `site.categories.CATEGORY`: un tableau de tous les posts appartennant à la catégorie CATEGORY. `site.categories.work` wvous donnera accès à un tableau de tous les posts dans la catégorie "work". Ceci est uniquement disponible pour les posts et n'est pas disponible pour les items des autres collections.
+- `site.tags.TAG`: un tableau de tous les posts auxquels le tag TAG est appliqué. `site.tags.jekyll` vous donnera accès à un tableau de tous les posts auxquels le tag "jekyll" est appliqué. Ceci est uniquement disponible pour les posts et n'est pas disponible pour les items des autres collections.
+
+#### Variables dans les fichiers individuels
+
+
+Vous pouvez facielement accéder aux variables définies dans vos YAML Front Matter (individuels ou par défaut) en utilisant la variable `page` et une syntaxe pointée. Si vous avez défini une variable `test` dans le YAML Front Matter d'une page, d'un post ou d'un item de collection, vous pouvez y accéder via `page.test`. Ces variables seront également disponibles dans les fichiers de layout références dans vos pages, posts et items de collections.
+
+En plus des variables que vous définissez, Jekyll créée [automatiquement certaines variables](http://jekyllrb.com/docs/variables/#page-variables) pour vos pages, posts et items de collection. Voici les principales:
+
+- `page.title`: le titre du post, de la page ou de l'item appartennant à une collection
+- `page.content`: le contenu de la page. Ce que la variable spéciale `{{ content }}` affichera dans un fichier de layout.
+- `page.date`: la date assignée au post ou à l'item d'une collection. Peut être spécifiée soit en utilisant le nom de fichier, soit via les variables de YAML Front Matter (individuels ou par défaut)
+- `page.categories`: la liste des catégories assignées au post. Ceci est uniquement disponible pour les posts et n'est pas disponible pour les items des autres collections.
+- `page.tags`: la liste des tags assignés au post.C eci est uniquement disponible pour les posts et n'est pas disponible pour les items des autres collections.
+
+#### Variables de configuration
+
+La variable `site` peut également être utilisée pour accéder aux valeurs des variables définies dans votre fichier `_config.yaml`. Si vous avez défini une variable `test` dans votre fichier `_config.yaml`, vous pouvez y accéder en utilisant simplement `site.test`.
 
 ### Rester DRY: includes et layouts
 
@@ -395,11 +461,19 @@ Dans ce cas précis, combiner un classement alphabétique sur le titre et le par
 {% endfor %}
 ```
 
+`capture` permet, comme son nom l'indique, de capturer plusieurs chaînes de caractères et de les stocker dans une variable. Ce genre de fonctionnalités peut s'avérer très utile en combinaison avec l'utilisation de plusieurs boucles.
+
+```liquid
+{% capture fullName %}{{ item.name | capitalize }} {{ item.surname | capitalize }}{% endcapture %}
+```
+
+Cette fonctionnalité peut être très utilse dans certaines situations, par
+
 ### Filtres: `sort`, `group_by` et `where`
 
-Liquid possède [une série de filtres](https://github.com/shopify/liquid/wiki/Liquid-for-Designers#standard-filters) qui peuvent s'avérer forts utiles et dont la plupart servent à faire de la manipulation de chaînes de caractères.
+Liquid possède [une série de filtres](https://github.com/shopify/liquid/wiki/Liquid-for-Designers#standard-filters) qui vous permettent de transformer des chaînes de cractères, des chiffres, des tableaux et des objets de diverses façons.
 
-Jekyl possède quant à lui quelques filtres qui lui sont propres. Parmi eux, trois sont essentiels au niveau de la manipulation de tableaux ou de hashes.
+Jekyll possède également quelques filtres qui lui sont propres. Parmi eux, trois sont essentiels au niveau de la manipulation de tableaux ou de hashes.
 
 - `sort`: permet, comme nous venons de le voir, de trier un tableau ou un hash à l'aide d'une de ses valeurs.
 - `group_by`: permet de grouper un tableau ou un hash par l'une de ses variables ou keys.
@@ -407,16 +481,16 @@ Jekyl possède quant à lui quelques filtres qui lui sont propres. Parmi eux, tr
 
 Voici quelques exemples d'applications pour les filtres `group_by` et `sort`:
 
-`group_by` et des boucles imbriquées permettent par exemple de créer facilement une archive de posts par année. Il faut pour cela que chacun de vos posts possède une variable `publication_year` dans son YAML Front Matter.
+`group_by` et des boucles imbriquées permettent par exemple de grouper vos posts par l'une de leurs propriétés. Par exemple, si chacun de vos posts possède une variable `postType` dans son YAML Front Matter, voici comment créer une archive par type.
 
 ```liquid
-<h2>Yearly archive</h2>
+<h2>Archive par type</h2>
 
-{% assign postsByYears = site.posts | group_by: "publication_year" %}
+{% assign postsByTypes = site.posts | group_by: "postType" %}
 
-{% for year in postsByYears %}
-  <h3>{{ year.name }}</h3>
-  {% for item in year.items %}
+{% for type in postsByTypes %}
+  <h3>{{ type.name }}</h3>
+  {% for item in type.items %}
 		{% if forloop.first %}<ul>{% endif %}
     	<li>{{ item.title }}</li>
 		{% if forloop.last %}</ul>{% endif %}
@@ -424,23 +498,23 @@ Voici quelques exemples d'applications pour les filtres `group_by` et `sort`:
 {% endfor %}
 ```
 
-Le filtre `where` va permettre de filtrer les éléments d'un array, par exemple pour n'afficher que les posts d'une categorie bien définie. Pour que cela fonctionne, il faut évidemment qu'une catégorie soit définie dans chacun de vos posts, soit dans chaque YAML Front Matter, soit via les YAML Front Matter Defaults de votre fichier `_config.yaml`.
+Le filtre `where` va permettre de filtrer les éléments d'un array, par exemple pour n'afficher que les posts écrit par un auteur. Pour que cela fonctionne, il faut évidemment qu'un auteur soit défini dans chacun de vos posts, soit dans chaque YAML Front Matter, soit via les YAML Front Matter Defaults de votre fichier `_config.yaml`.
 
 ```liquid
-<h2>Post in category</h2>
+<h2>Post par auteur</h2>
 
-{% assign postsInCategory = site.posts | where: 'category','foo' %}
+{% assign postsByAuthor = site.posts | where: 'author','Gengis Khan' %}
 
-{% for item in postsInCategory %}
+{% for item in postsByAuthor %}
 	{% if forloop.first %}<ul>{% endif %}
   	<li>{{ item.title }}</li>
 	{% if forloop.last %}</ul>{% endif %}
 {% endfor %}
 ```
 
-### Data et fichier YAML
+### Data et fichiers YAML, JSON, CSV
 
-Comme dit plus haut, Jekyll vous permet de manipuler à l'aide e Liquid des fichiers de données structurées. Voici un exemple de navigation créée sur base d'un fichier YAML.
+Comme dit plus haut, Jekyll vous permet de manipuler des fichiers de données en YAML, JSON, CSV à l'aide e Liquid. Voici un exemple de navigation créée sur base d'un fichier YAML.
 
 **nav**: *_data/nav.yaml*
 ```yaml
@@ -479,9 +553,9 @@ Comme dit plus haut, Jekyll vous permet de manipuler à l'aide e Liquid des fich
 
 ## Jekyll et Github pages
 
-Jekyll est aussi le moteur de Github pages, un outil qui permet de gérer et d'héberger des sites statiques. Tous les repositories Github permettent de faire tourner Jekyll. La marche à suivre est différenets selon qu'il s'agit d'un projet ou d'une page de user ou d'organisation mais cela reste assez simple.
+Jekyll est aussi le moteur de Github pages, un outil qui permet de gérer et d'héberger des sites statiques. Tous les repositories Github permettent de faire tourner Jekyll. La marche à suivre est différent selon qu'il s'agit d'un projet ou d'une page de user ou d'organisation mais cela reste assez simple.
 
-Le duo Jekyll et Github Pages vous permet de disposer d'un environnement collaboratif, d'un hébergement gratuit et d'un site entièrement gérer via Git.
+Le duo Jekyll et Github Pages vous permet de disposer d'un environnement collaboratif, d'un hébergement gratuit et d'un site entièrement géré via Git.
 
 ## Ressources
 
