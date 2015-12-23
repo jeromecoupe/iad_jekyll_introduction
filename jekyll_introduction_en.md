@@ -2,11 +2,11 @@
 
 ## Introduction
 
-[Jekyll](http://jekyllrb.com) is a static site generator created by [Tom Preston Werner](http://tom.preston-werner.com/). This open source project is maintained by a core team led by [Parker Moore](https://byparker.com/) and by the community.
+[Jekyll](http://jekyllrb.com) is a static site generator developed in Ruby and created originally by [Tom Preston Werner](http://tom.preston-werner.com/). The source code is [available on Github](https://github.com/jekyll/jekyll).
 
 Jekyll allows you to create websites based on dynamic templates (coded with [Liquid](http://liquidmarkup.org/)) and content files written in (YAML / Markdown / HTML / JSON / CSV). There is no database involved. Based on content and template files, Jekyll will generate and entirely static website that can then be deployed on any type of hosting or on [Github Pages](https://pages.github.com/).
 
-Jekyll is written in Ruby. The most common workflow is to generate your site locally and to publish the generated static files. The main advantages of a static site generator can be summarized as follows:
+The most common workflow is to generate your site locally and to publish the generated static files. The main advantages of a static site generator can be summarized as follows:
 
 - Everything is file based so your entire website can be full version controlled with tools like Git.
 - Simple static files are incredibly easy to host and make for fast and performant websites
@@ -116,18 +116,18 @@ Several of those global configuration variables are implicit ([their values are 
 Jekyll offers you various ways of creating structured data to use in your project. The main three tools at your disposal are:
 
 - **pages**: allow you to create and manage on-off pages having no logical relationships with other items in your site (hompage, contact page, etc).
-- **collections**: allow you to create pieces of content that are logically to each other through a series of (html or markdown) files . A collection might be configured to generate separate files for each item in the collection when the site is built via the `output` variable. The URL structure and path for each generated file can be managed via the `permalink` variable (more on those later)
+- **collections**: allow you to create pieces of content that are logically to each other through a series of (html or markdown) files . A collection might be configured to generate separate files for each document in the collection when the site is built via the `output` variable. The URL structure and path for each generated file can be managed via the `permalink` variable (more on those later). As of Jekyll 3.0.0 posts is a collection that has a bit of a special status.
 - **data**: allow you to create and manage data through structured data format like JSON, CSV or YAML. These pieces of data will not generate discrete files with distinct URLs.
 
 ### Pages
 
-[Pages](http://jekyllrb.com/docs/pages/) are simply HTML or Markdown files. You can use their YAML Front Matter to create your won variables or to use the default variables made available by Jekyll.
+[Pages](http://jekyllrb.com/docs/pages/) are simply HTML or Markdown files. You can use their YAML Front Matter to create your own variables or to use the default variables made available by Jekyll.
 
 You can access all these variables through the `page` object in dot notation. For example, a `test` variable in the YAML Front Matter of a page can be accessed using `page.test`.
 
 ### Collections
 
-[Collections](http://jekyllrb.com/docs/collections/) allow you to create logically related data items using a series of HTML or Markdown files. To create a collection, you will need to create a `_mycollection` folder at the root of your project and then to define `mycollection` in your `_config.yaml` file. The name of the folder without the underscore has to macth the name of the collection defined in `_config.yaml`.
+[Collections](http://jekyllrb.com/docs/collections/) allow you to create logically related data items using a series of HTML or Markdown files. To create a collection, you will need to create a `_mycollection` folder at the root of your project and then to define `mycollection` in your `_config.yaml` file. The name of the folder without the underscore has to match the name of the collection defined in `_config.yaml`.
 
 Given a `_mycollection` folder, the following would define the collection in your `_config.yaml` file:
 
@@ -145,11 +145,13 @@ collections:
     permalink: /collection/:year/:title
 ```
 
-Common characteristics and variables for all items in a collection can be defined via [YAML Front Matter Defaults](http://jekyllrb.com/docs/configuration/#Front Matter-defaults) (see infra for detail).
+Common characteristics and variables for all documents in a collection can be defined via [YAML Front Matter Defaults](http://jekyllrb.com/docs/configuration/#Front Matter-defaults) (see infra for detail).
 
 #### Posts: a collection with a special status
 
-[Posts](http://jekyllrb.com/docs/posts/) harken back to the early days of Jekyll, when it was created as a blogging platform. All Jekyll installations now have a default `_posts` that Jekyll defines implicitely. The `posts` collection has a special status in Jekyll and has functionalities that are not yet available to regular collections. A prime example would be the category and tag management available for posts.
+[Posts](http://jekyllrb.com/docs/posts/) harken back to the early days of Jekyll, when it was created as a blogging platform. All Jekyll installations now have a default `_posts` that Jekyll defines implicitely.
+
+The `posts` collection has a special status in Jekyll and has functionalities that are not yet available to regular collections. A prime example would be the category and tag management available for posts.
 
 ### YAML Front Matter variables
 
@@ -157,11 +159,11 @@ As established earlier variables defined in the YAML Front Matters of your files
 
 Some variables are specific to Jekyll and can be used in all your files:
 
-- **layout:** specifies the layout to be used with that page or collection file (cf infra)
-- **permalink:** specifies the permalink and the path structure for the output file generated by a page or collection file
+- **layout:** specifies the layout to be used with that page or collection document (cf infra)
+- **permalink:** specifies the permalink and the path structure for the output file generated by a page or collection document
 - **published:** specifies the publish status of the page (can be true or false)
-- **category / categories:** spécifies the categories that should be applied to the page or collection file
-- **tags:** spécifies the tags that should be applied to the page or collection file
+- **category / categories:** spécifies the categories that should be applied to the page or collection document
+- **tags:** spécifies the tags that should be applied to the page or collection document
 
 You can also define your own variables in the YAML Front Matter of your files and are allowed to use the different variable types available through YAML: strings, lists, arrays, nested lists, etc.
 
@@ -239,9 +241,9 @@ When it runs, Jekyll makes a bunch of variables available to you via the Liquid 
 
 #### Global variables
 
-`site`: Mainly used to access arrays of your pages, posts and collection items. Also used to access configuration variables set in your `_config.yml`. See below for details.
-`page`: Used to access specific variables specified via the YAML Front Matter or via YAML Front Matter Default. See below for details.
-`content`: Special variable used in layout files, placeholder for the rendered content of the post, page or collection item being wrapped. Not defined in Post or Page files.
+- `site`: Mainly used to access arrays of your pages, posts and collection documents. Also used to access configuration variables set in your `_config.yml`. See below for details.
+- `page`: Used to access specific variables specified via the YAML Front Matter or via YAML Front Matter Default. See below for details.
+- `content`: Special variable used in layout files, placeholder for the rendered content of the post, page or collection document being wrapped. Not defined in Post or Page files.
 
 #### Variables related to collections, pages and data
 
@@ -280,11 +282,11 @@ Jekyll will also give you access to other global variables related to your pages
 
 As mentioned earlier, custom variables defined via individual YAML Front Matter or via YAML Front Matter defaults can be accessed using dot notation on the `page` variable. So, if a `test` variable is defined in the YAML Front Matter, you can access it in the body of that file using `page.test`. Those custom variables will also be available in any layout file that page references as well.
 
-On top of the variables you create, [Jekyll automatically creates some variables](http://jekyllrb.com/docs/variables/#page-variables) for your posts, pages and collection items and makes them available to Liquid. Here are the main ones:
+On top of the variables you create, [Jekyll automatically creates some variables](http://jekyllrb.com/docs/variables/#page-variables) for your posts, pages and collection documents and makes them available to Liquid. Here are the main ones:
 
 - `page.title`: the post or page title
 - `page.content`: the content of the page. The part of the page the special `{{ content }}` variable will display in a layout.
-- `page.date`: the date assigned to the collection item. Can either be set using the file name or using, YAML Front Matter or YAML Front Matter Default variables.
+- `page.date`: the date assigned to the collection document. Can either be set using the file name or using, YAML Front Matter or YAML Front Matter Default variables.
 - `page.categories`: the list of the categories assigned to the post. This only works for posts, not for items in any other collections.
 - `page.tags`: the list of the tags assigned to the post. This only works for posts, not for items in any other collections.
 
@@ -428,7 +430,7 @@ Coupled to a `for` loop and to [loop variables](https://github.com/shopify/liqui
 ```Liquid
 {% for item in site.posts %}
   {% if foorloop.first %}<ul>{% endif %}
-    {{ item.title }}
+    <li>{{ item.title }}</li>
   {% if foorloop.last %}</ul>{% endif %}
 {% else %}
   <p>No blogposts found</p>
@@ -444,7 +446,7 @@ Let's start with `assign`, a tag allowing you to simply create a variable and as
 
 {% for item in blogpostsPerTitle reversed %}
   {% if foorloop.first %}<ul>{% endif %}
-    {{ item.title }}
+    <li>{{ item.title }}</li>
   {% if foorloop.last %}</ul>{% endif %}
 {% else %}
   <p>No blogposts found</p>
@@ -458,7 +460,7 @@ In this case, combining an alphabetical sorting on the title and the `reversed` 
 
 {% for item in blogpostsPerTitle limit:2 %}
   {% if foorloop.first %}<ul>{% endif %}
-    {{ item.title }}
+    <li>{{ item.title }}</li>
   {% if foorloop.last %}</ul>{% endif %}
 {% else %}
   <p>No blogposts found</p>
@@ -471,7 +473,7 @@ As the name suggests, `capture` allows you to capture various strings and to sto
 {% capture fullName %}{{ item.name | capitalize }} {{ item.surname | capitalize }}{% endcapture %}
 ```
 
-That type of functionality can be very useful in certain situations, for example when you have to create a yearly archive or your posts:
+That functionality can be very useful in certain situations, for example when you have to create a yearly archive or your posts:
 
 ```Liquid
 {% assign allPosts = site.posts | sort:"post.date" %}
@@ -545,17 +547,16 @@ As we said earlier, Jekyll allows you to easily manipulate data files written in
 
 **YAML**: *_data/nav.yaml*
 ```yaml
--
-  navLabel: 'Home'
+- navLabel: 'Home'
   navLink: '/'
--
-  navLabel: 'Blog'
+
+- navLabel: 'Blog'
   navLink: '/blog/'
--
-  navLabel: 'Portfolio'
+
+- navLabel: 'Portfolio'
   navLink: '/work/'
--
-  navLabel: 'Contact'
+
+- navLabel: 'Contact'
   navLink: '/contact/'
 ```
 
@@ -596,5 +597,6 @@ By combining Jekyll and Github pages, you will get yourself a collaborative envi
 - [Intro to Jekyll](https://www.youtube.com/watch?v=O7NBEFmA7yA) (Video) - Johan Ronsse: a good introduction to Jekyll as prototyping tool
 - [Jekyll From Scratch - Getting Started](http://pixelcog.com/blog/2013/jekyll-from-scratch-introduction/), [Jekyll From Scratch - Core Architecture](http://pixelcog.com/blog/2013/jekyll-from-scratch-core-architecture/) and [Jekyll From Scratch - Extending Jekyll](http://pixelcog.com/blog/2013/jekyll-from-scratch-extending-jekyll/) - Mike Greiling: very good intooduction to all aspects of Jelyll.
 - [Get Started With GitHub Pages (Plus Bonus Jekyll)](https://24ways.org/2013/get-started-with-github-pages/) - Anna Debenham: an introduction to Github Pages and Jekyll
-- [Build A Blog With Jekyll And GitHub Pages](http://www.smashingmagazine.com/2014/08/build-blog-jekyll-github-pages/) - Barry Clark: tutorialon how to build a blogs.
+- [Build A Blog With Jekyll And GitHub Pages](http://www.smashingmagazine.com/2014/08/build-blog-jekyll-github-pages/) - Barry Clark: tutorial on how to build a blogs.
 - [Front-end style guides with Jekyll](http://webstoemp.com/blog/front-end-style-guides-jekyll/) - Jérôme Coupé: using Jekyll to create style guides.
+- [Static Sites Go All Hollywood](https://vimeo.com/145138875) - Phil Hawksworth: a good introductions to the advantages and inconvenients of using static sites generators. A nice bit on modern workflows and infrastructures, too.
