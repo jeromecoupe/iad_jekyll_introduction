@@ -4,13 +4,13 @@
 
 [Jekyll](http://jekyllrb.com) is a static site generator developed in Ruby and created originally by [Tom Preston Werner](http://tom.preston-werner.com/). The source code is [available on Github](https://github.com/jekyll/jekyll).
 
-Jekyll allows you to create websites based on dynamic templates (coded with [Liquid](http://liquidmarkup.org/)) and content files written in (YAML / Markdown / HTML / JSON / CSV). There is no database involved. Based on content and template files, Jekyll will generate and entirely static website that can then be deployed on any type of hosting or on [Github Pages](https://pages.github.com/).
+Jekyll allows you to create websites based on dynamic templates coded with [Liquid](http://liquidmarkup.org/)) and content files written in YAML / Markdown / HTML / JSON / CSV. There is no database involved. Based on content and template files, Jekyll will generate an entirely static website that can then be deployed on any type of hosting or on [Github Pages](https://pages.github.com/).
 
 The most common workflow is to generate your site locally and to publish the generated static files. The main advantages of a static site generator can be summarized as follows:
 
-- Everything is file based so your entire website can be full version controlled with tools like Git.
-- Simple static files are incredibly easy to host and make for fast and performant websites
-- Your infrastructure remains simple, cheap and offers less opportunities to hackers
+- Everything is file based so your entire website can be fully version controlled with tools like Git.
+- Static files are incredibly easy to host and make for fast and performant websites.
+- Your infrastructure remains simple, cheap and offers less opportunities to hackers.
 
 ## Installation
 
@@ -50,11 +50,11 @@ Look for the latest stable version of Ruby:
 
 `rvm list known`
 
-That will get you a big long list of versions. Install any version using the following command (replace the version by the one you need) and ... answser "yes" to all the question RVM asks you.
+That will get you a big long list of versions. Install any version using the following command (replace the version by the one you need) and ... answser "yes" to all questions.
 
 `rvm install 2.2.3`
 
-You can then choose the version of Ruby you want to use amongst the ones RVM has availableon your machine:
+You can then choose the version of Ruby you want to use amongst the ones RVM has available on your machine:
 
 `rvm list` and `rvm --default use 2.2.3`
 
@@ -92,14 +92,14 @@ Jekyll will create the following folders and files for you. We will come back to
 
 ### Basic concepts and commands
 
-Jekyll will use these files and folders as a basis to create a fully static website. This static wbeiste is generated in the `_site` folder by default.
+Jekyll will use these files and folders as a basis to create a fully static website. This static website is generated in the `_site` folder by default.
 
-- Jekyll will process all files with a YAML Front Matter (including empty YAML Front Matters), amke them available in memory and make them usable by the Liquid templating engine and Jekyll tags.
-- Files and folders with a name starting with underscore will not be transfered to the `_site` folder, whicle the others will be after having been processed by the Jekyll pipeline.
+- Jekyll will process all files with a YAML Front Matter (including empty YAML Front Matters), make them available in memory and make them usable by the Liquid templating engine and Jekyll tags.
+- Files and folders with a name starting with underscore will not be transferred to the `_site` folder, while the others will be after having been processed by the Jekyll pipeline.
 
 When in your project folder, the `jekyll build` command is used to generate your website. If you want the regeneration to happen every time a file is changed, just use the `--watch` flag: `jekyll build --watch`.
 
-You can also use `jekyll serve` to launch a developement server and vie your site at `http://localhost:4000/` (auto-regenaration is on by default).
+You can also use `jekyll serve` to launch a development server and vie your site at `http://localhost:4000/` (auto-regeneration is on by default).
 
 Since Jekyll 3.0.0 you can use `jekyll build --incremental` to regenerate only the parts of the site that changed instead of the hole thing each time, a big deal for huge websites. You can also use `jekyll build --profiler` and Jekyll will give you a build time for each of your resources to identify possible bottlenecks.
 
@@ -107,16 +107,16 @@ Since Jekyll 3.0.0 you can use `jekyll build --incremental` to regenerate only t
 
 [Global configuration options](http://jekyllrb.com/docs/configuration/#global-configuration) for your site are stored in the variables of the aptly named `_config.yaml` file at the root of your project.
 
-Variables defined in `_config.yaml` can be accessed from your template using the `site` object and dot notation. For example, you can access the `title` variable in your `_config.yaml` file by using `site.title`. You can define your own custom variables in that file. Custom variables are accessed in the same way: you can access your custom `test` variable by using `site.test`.
+Variables defined in `_config.yaml` can be accessed from your templates using the `site` object and dot notation. For example, you can access the `title` variable in your `_config.yaml` file by using `site.title`. You can define your own custom variables in that file. Custom variables are accessed in the same way: you can access your custom `test` variable by using `site.test`.
 
-Several of those global configuration variables are implicit ([their values are specified by default](http://jekyllrb.com/docs/configuration/)) but they can all be overriden if needs be.
+Several of those global configuration variables are implicit ([their values are specified by default](http://jekyllrb.com/docs/configuration/)) but they can all be overridden if needs be.
 
 ## Create your data structure
 
 Jekyll offers you various ways of creating structured data to use in your project. The main three tools at your disposal are:
 
 - **pages**: allow you to create and manage on-off pages having no logical relationships with other items in your site (hompage, contact page, etc).
-- **collections**: allow you to create pieces of content that are logically to each other through a series of (html or markdown) files . A collection might be configured to generate separate files for each document in the collection when the site is built via the `output` variable. The URL structure and path for each generated file can be managed via the `permalink` variable (more on those later). As of Jekyll 3.0.0 posts is a collection that has a bit of a special status.
+- **collections**: allow you to create pieces of content that are logically related to each other through a series of (html or markdown) files. Via the `output` variable, a collection might be configured to generate separate files for each document in the collection when the site is built. The URL structure and path for each generated file can be managed via the `permalink` variable (more on those later). As of Jekyll 3.0.0 `posts` is a collection that has a bit of a special status.
 - **data**: allow you to create and manage data through structured data format like JSON, CSV or YAML. These pieces of data will not generate discrete files with distinct URLs.
 
 ### Pages
@@ -127,7 +127,7 @@ You can access all these variables through the `page` object in dot notation. Fo
 
 ### Collections
 
-[Collections](http://jekyllrb.com/docs/collections/) allow you to create logically related data items using a series of HTML or Markdown files. To create a collection, you will need to create a `_mycollection` folder at the root of your project and then to define `mycollection` in your `_config.yaml` file. The name of the folder without the underscore has to match the name of the collection defined in `_config.yaml`.
+[Collections](http://jekyllrb.com/docs/collections/) allow you to create logically related documents using a series of HTML or Markdown files. To create a collection, you will need to create a `_mycollection` folder at the root of your project and then to define `mycollection` in your `_config.yaml` file. The name of the folder without the underscore has to match the name of the collection defined in `_config.yaml`.
 
 Given a `_mycollection` folder, the following would define the collection in your `_config.yaml` file:
 
@@ -145,11 +145,11 @@ collections:
     permalink: /collection/:year/:title
 ```
 
-Common characteristics and variables for all documents in a collection can be defined via [YAML Front Matter Defaults](http://jekyllrb.com/docs/configuration/#Front Matter-defaults) (see infra for detail).
+Common characteristics and variables for all documents in a collection can be defined via [YAML Front Matter Defaults](http://jekyllrb.com/docs/configuration/#Front Matter-defaults) (see below for detail).
 
 #### Posts: a collection with a special status
 
-[Posts](http://jekyllrb.com/docs/posts/) harken back to the early days of Jekyll, when it was created as a blogging platform. All Jekyll installations now have a default `_posts` that Jekyll defines implicitely.
+[Posts](http://jekyllrb.com/docs/posts/) harken back to the early days of Jekyll, when it was created as a blogging platform. All Jekyll installations now have a default `_posts` that Jekyll defines implicitly.
 
 The `posts` collection has a special status in Jekyll and has functionalities that are not yet available to regular collections. A prime example would be the category and tag management available for posts.
 
@@ -162,8 +162,8 @@ Some variables are specific to Jekyll and can be used in all your files:
 - **layout:** specifies the layout to be used with that page or collection document (cf infra)
 - **permalink:** specifies the permalink and the path structure for the output file generated by a page or collection document
 - **published:** specifies the publish status of the page (can be true or false)
-- **category / categories:** spécifies the categories that should be applied to the page or collection document
-- **tags:** spécifies the tags that should be applied to the page or collection document
+- **category / categories:** specifies the categories applied to the page or collection document
+- **tags:** spécifies the tags applied to the page or collection document
 
 You can also define your own variables in the YAML Front Matter of your files and are allowed to use the different variable types available through YAML: strings, lists, arrays, nested lists, etc.
 
@@ -188,7 +188,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque nobis perspicia
 
 Rather than defining common variables for files in their individual YAML Front Matters, you can configure [YAML Front Matter defaults](http://jekyllrb.com/docs/configuration/#front-matter-defaults) through your `_config.yaml` file. Via the `default` variable, you can define default variables and common values for groups of files. These groups are defined using their `path` (mandatory) and their `type` (optionnal).
 
-- **path**: path from the root of the project. A `path` value is mandatory, even if you are using a `type` as well. An empty value will target all files in your project.
+- **path**: path from the root of the project. A `path` value is mandatory, even if you are using a `type` as well. An empty `path` value will target all files in your project.
 - **type**: target a file type. Available types are `pages`, `posts` and `collectionname`.
 
 For example, you can specify common values for Jekyll-specific variables like `layout`, `category` or `permalink` or for custom variables you create. These default values can be overridden by values in the YAML Front Matter of each individual files.
@@ -272,23 +272,24 @@ The `summary` variable defined in the YAML Front Matter of all projects can be a
 
 Jekyll will also give you access to other global variables related to your pages, posts and collections. Here are the ones you will probably be using the most:
 
-- `site.pages`: gives you an array of all your pages
-- `site.collections`: gives you an array of all your collections and of [their attributes](http://jekyllrb.com/docs/collections/#collections)
+- `site.pages`: an array of all your pages
+- `site.collections`: an array of all your collections and of [their attributes](http://jekyllrb.com/docs/collections/#collections)
 - `site.data`: an array containing the data loaded from the data files located in the `_data` directory. To access the data in an individual file, simply use `site.data.filename`.
-- `site.categories.CATEGORY`: an array of all posts in the CATEGORY categories. `site.categories.work` will get you an array of all posts in the "work" category. This only works for posts, not for items in any other collections.
-- `site.tags.TAG`: an array of all posts to which the TAG tag is applied. `site.tags.jekyll` will get you an array of all posts to which the "jekyll" tag has been applied. This only works for posts, not for items in any other collections.
+- `site.categories.CATEGORY`: an array of all posts in the CATEGORY categories. `site.categories.work` will get you an array of all posts in the "work" category. This only works for `posts`, not for items in any other collections.
+- `site.tags.TAG`: an array of all posts to which the TAG tag is applied. `site.tags.jekyll` will get you an array of all posts to which the "jekyll" tag has been applied. This only works for `posts`, not for items in any other collections.
 
-#### Variables in pages
+#### Variables in pages, posts and collection documents
 
-As mentioned earlier, custom variables defined via individual YAML Front Matter or via YAML Front Matter defaults can be accessed using dot notation on the `page` variable. So, if a `test` variable is defined in the YAML Front Matter, you can access it in the body of that file using `page.test`. Those custom variables will also be available in any layout file that page references as well.
+As mentioned earlier, custom variables defined via individual YAML Front Matter or via YAML Front Matter defaults for `pages`, `posts` and collection documents can be accessed using dot notation on the `page` variable. So, if a `test` variable is defined in the YAML Front Matter, you can access it in the body of that file using `page.test`. Those custom variables will also be available in any layout file that page references.
 
 On top of the variables you create, [Jekyll automatically creates some variables](http://jekyllrb.com/docs/variables/#page-variables) for your posts, pages and collection documents and makes them available to Liquid. Here are the main ones:
 
-- `page.title`: the post or page title
-- `page.content`: the content of the page. The part of the page the special `{{ content }}` variable will display in a layout.
+- `page.title`: the page, post or document title.
+- `page.content`: the content of the page, post or document. The part of the page the special `{{ content }}` variable will display in a layout.
 - `page.date`: the date assigned to the collection document. Can either be set using the file name or using, YAML Front Matter or YAML Front Matter Default variables.
-- `page.categories`: the list of the categories assigned to the post. This only works for posts, not for items in any other collections.
-- `page.tags`: the list of the tags assigned to the post. This only works for posts, not for items in any other collections.
+- `page.url`: the URL of the Post without the domain, but with a leading slash, e.g. `/2008/12/14/my-post.html`.
+- `page.next`: the next post relative to the position of the current post in `site.posts`. Returns `nil` for the last entry.
+- `page.previous`: the previous post relative to the position of the current post in `site.posts`. Returns `nil` for the first entry.
 
 #### Configuration variables
 
@@ -527,7 +528,7 @@ Here are some examples for the `group_by` and `sort` filters:
 {% endfor %}
 ```
 
-The `where` filter will allow you to filter all elements of an array. An example would be to only display the posts by one specific author. In order for this code to work, you obviously need an author to be defined for your posts, either in the YAML Front Matters of your posts, or via YAML Front Matter Defaults in your `_config.yaml`.
+The `where` filter will allow you to filter elements of an array. An example would be to only display the posts by one specific author. In order for this code to work, you obviously need an `author` variable to be defined in the YAML Front Matters of your posts.
 
 ```Liquid
 <h2>Posts by author</h2>

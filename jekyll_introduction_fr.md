@@ -11,8 +11,8 @@ Le workflow le plus répandu consiste à générer son site localement et à met
 Les avantages des générateurs de sites statiques peuvent être résumés comme suit:
 
 - Tout est basé sur des fichiers. Votre site peut être entièrement géré par un système de version control comme Git
-- De simples fichiers statiques sont incoyablement faciles à héberger sur n'importe quelle infrastructure et rendent votre site très rapide à charger.
-- Votre infrastructre serveur reste très simple et offres moins de possibilités aux hackers qu'un site dynamique.
+- De simples fichiers statiques sont incroyablement faciles à héberger sur n'importe quelle infrastructure et rendent votre site très rapide à charger.
+- Votre infrastructure serveur reste très simple et offres moins de possibilités aux hackers qu'un site dynamique.
 
 ## Installation
 
@@ -101,7 +101,7 @@ Jekyll fonctionne en parcourant cette arborescence pour générer un site statiq
 
 Une fois dans le dossier de votre projet, la commande `jekyll build` est utilisée pour générer votre site. Si vous souhaitez que ce site soit généré à nouveau automatiquement dès que Jekyll détecte des changements dans votre projet, utilisez la commande `jekyll build --watch`.
 
-Vous pouvez également utiliser `jekyll serve` pour vous permettre de visualiser votre site sur un serveur de dévelopement à l'adresse `http://localhost:4000/` (la régénération automatique est activée par défaut).
+Vous pouvez également utiliser `jekyll serve` pour vous permettre de visualiser votre site sur un serveur de développement à l'adresse `http://localhost:4000/` (la régénération automatique est activée par défaut).
 
 Depuis Jekyll 3.0.0, vous pouvez utiliser `jekyll build --incremental` pour régénérer votre site de façon incrémentale et gagner du temps, ainsi que `jekyll build --profiler` pour faire tourner un profiler vous montrant le temps de build pour chaque ressource.
 
@@ -120,7 +120,7 @@ Certaines de ces options de configuration sont implicites ([spécifiées par dé
 Jekyll vous propose différentes façons de créer vos données et de les structurer. Les trois outils principaux à votre disposition sont :
 
 - **pages**: permettent de gérer contenus isolés, sans aucun lien logique avec d'autres (homepage, contact, etc.)
-- **collections**: permettent de gérer des contenus liés entre eux de façon logique à travers des séries de fichiers HTML ou Markdown. Les documents d'une collection peuvent éventuellement générer un fichier lorsque le site est généré (`output: true`) et également avoir une URL spécifiqu (`permalink`). A partir de Jekyll 3.0.0 les posts sont une collection ayant un statut un peu particulier (cf infra).
+- **collections**: permettent de gérer des contenus liés entre eux de façon logique à travers des séries de fichiers HTML ou Markdown. Les documents d'une collection peuvent éventuellement générer un fichier lorsque le site est généré (`output: true`) et également avoir une URL spécifique (structure spécifiée à l'aide de la variable `permalink`). A partir de Jekyll 3.0.0 les posts sont une collection ayant un statut un peu particulier (cf infra).
 - **data**: permet de gérer des contenus structurés dans des formats tels que YAML ou JSON. Ces données ne généreront pas de fichiers propres avec des URLs distinctes.
 
 ### Pages
@@ -241,7 +241,7 @@ Lorsque Jekyll tourne, il vous créée une série de variables auxquelles vous a
 
 #### Variables globales
 
-- `site`: utilisée principalement pour accéder aux tableaux reprennant vos pages, posts et collections. Egalement utilisé pour accéder aux variables spécifiées dans votre fichier `_config.yaml`. Voir plus bas.
+- `site`: utilisée principalement pour accéder aux tableaux reprenant vos pages, posts et documents de collections. Egalement utilisé pour accéder aux variables spécifiées dans votre fichier `_config.yaml`. Voir plus bas.
 - `page`: utilisée principalement pour accéder aux variables spécifiées via les YAML Front Matters de vos fichiers individuels ou via les YAML Front Matter par défaut spécifiées dans votre fichier `_config.yaml`.
 - `content`: variable spéciale utilisée uniquement dans les fichiers de layout. Cette variable sera remplacée par le contenu du post, de la page ou du document membre d'une collection auquel le fichier de layout est appliqué. Voir plus bas.
 
@@ -287,8 +287,9 @@ En plus des variables que vous définissez, Jekyll créée [automatiquement cert
 - `page.title`: le titre du post, de la page ou du document appartenant à une collection
 - `page.content`: le contenu de la page. Ce que la variable spéciale `{{ content }}` affichera dans un fichier de layout.
 - `page.date`: la date assignée au post ou au document d'une collection. Peut être spécifiée soit en utilisant le nom de fichier, soit via les variables de YAML Front Matter (individuels ou par défaut)
-- `page.categories`: la liste des catégories assignées au post. Ceci est uniquement disponible pour les posts et n'est pas disponible pour les items des autres collections.
-- `page.tags`: la liste des tags assignés au post. Ceci est uniquement disponible pour les posts et n'est pas disponible pour les items des autres collections.
+- `page.url`: l'URL de la page, du post ou du document appartenant à une collection, précédée d'un slash. Par exemple: `/2008/12/14/my-post.html`.
+- `page.next`: le post suivant par rapport à la position du post dans le tableau `site.posts`. Retourne `nil` pour la dernière entrée.
+- `page.previous`: le post précédent par rapport à la position du post dans le tableau `site.posts`. Retourne `nil` pour la première entrée.
 
 #### Variables de configuration
 
@@ -472,7 +473,7 @@ Dans ce cas précis, combiner un classement alphabétique sur le titre et le par
 {% capture fullName %}{{ item.name | capitalize }} {{ item.surname | capitalize }}{% endcapture %}
 ```
 
-Cette fonctionnalité peut être très utilse dans certaines situations, par exemple pour créer une archive de vos posts classés par année:
+Cette fonctionnalité peut être très utile dans certaines situations, par exemple pour créer une archive de vos posts classés par année:
 
 ```Liquid
 {% assign allPosts = site.posts | sort: 'post.date' %}
@@ -526,7 +527,7 @@ Voici quelques exemples d'applications pour les filtres `group_by` et `where` :
 {% endfor %}
 ```
 
-Le filtre `where` va permettre de filtrer les éléments d'un array, par exemple pour n'afficher que les posts écrit par un auteur. Pour que cela fonctionne, il faut évidemment qu'un auteur soit défini dans chacun de vos posts, soit dans chaque YAML Front Matter, soit via les YAML Front Matter Defaults de votre fichier `_config.yaml`.
+Le filtre `where` va permettre de filtrer les éléments d'un array, par exemple pour n'afficher que les posts écrit par un auteur. Pour que cela fonctionne, il faut évidemment qu'une variable `author` soit définie dans le YAML Front Matter de chacun de vos posts.
 
 ```Liquid
 <h2>Post par auteur</h2>
@@ -598,4 +599,4 @@ Le duo Jekyll et GitHub Pages vous permet de disposer d'un environnement collabo
 - [Get Started With GitHub Pages (Plus Bonus Jekyll)](https://24ways.org/2013/get-started-with-github-pages/) - Anna Debenham : bonne introduction au duo Github Pages et Jekyll
 - [Build A Blog With Jekyll And GitHub Pages](http://www.smashingmagazine.com/2014/08/build-blog-jekyll-github-pages/) - Barry Clark : une  introduction centrée sur un blog.
 - [Front-end style guides with Jekyll](http://webstoemp.com/blog/front-end-style-guides-jekyll/) - Jérôme Coupé : utilisation de Jekyll pour réaliser facilement des styles guides.
-- [Static Sites Go All Hollywood](https://vimeo.com/145138875) - Phil Hawksworth: une bonne introduction aux avantages, inconvenients et workflows liés aux static sites generators.
+- [Static Sites Go All Hollywood](https://vimeo.com/145138875) - Phil Hawksworth: une bonne introduction aux avantages, inconvénients et workflows liés aux static sites generators.
