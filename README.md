@@ -1,10 +1,10 @@
-# Cours IAD: Introduction à Jekyll
+# Introduction to Jekyll
 
-Ce cours est une introduction à [Jekyll](http://jekyllrb.com), un Static Site Generator créé par Tom Preston-Werner, Nick Quaranto, Parker Moore, et beaucoup d'autres.
+This course is an introduction to Jekyll [Jekyll](http://jekyllrb.com), a Static Site Generator by Tom Preston-Werner, Nick Quaranto, Parker Moore, and many others.
 
-Workshop donné à l'Institut des Arts de Diffusion par Jérôme Coupé.
+Workshop by [Jérôme Coupé](http://webstoemp.com) - Institut des Arts de Diffusion
 
-- [Version Française](/jekyll_introduction_fr.md)
 - [English version](/jekyll_introduction_en.md)
+- [Version Française](/jekyll_introduction_fr.md)
 
-Licence: [Creative Commons Attribution 4.0 International license](http://creativecommons.org/licenses/by/4.0/)
+[Creative Commons Attribution 4.0 International license](http://creativecommons.org/licenses/by/4.0/)
