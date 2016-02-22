@@ -80,7 +80,7 @@ Pour utiliser Jekyll, il vous suffit de créer un dossier dans votre environneme
 
 Jekyll devrait vous créer l'arborescence suivante (nous y reviendrons dans le détail) :
 
-- **_config.yaml** : fichier de configuration principal de votre site Jekyll
+- **_config.yml** : fichier de configuration principal de votre site Jekyll
 - **_includes** : contient vos includes
 - **_layouts** : contient vos fichiers de layout
   - **default.html** : layout par défaut
