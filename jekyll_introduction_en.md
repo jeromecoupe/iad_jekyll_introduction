@@ -78,7 +78,7 @@ To create a Jekyll project, you just have to create a folder in your local dev e
 
 Jekyll will create the following folders and files for you. We will come back to this in detail later on:
 
-- **_config.yaml**: main configuration file for your Jekyll site
+- **_config.yml**: main configuration file for your Jekyll site
 - **_includes**: contains your include files
 - **_layouts**: contains your layout files
   - **default.html**: default layout
@@ -105,9 +105,9 @@ Since Jekyll 3.0.0 you can use `jekyll build --incremental` to regenerate only t
 
 ### Configuration
 
-[Global configuration options](http://jekyllrb.com/docs/configuration/#global-configuration) for your site are stored in the variables of the aptly named `_config.yaml` file at the root of your project.
+[Global configuration options](http://jekyllrb.com/docs/configuration/#global-configuration) for your site are stored in the variables of the aptly named `_config.yml` file at the root of your project.
 
-Variables defined in `_config.yaml` can be accessed from your templates using the `site` object and dot notation. For example, you can access the `title` variable in your `_config.yaml` file by using `site.title`. You can define your own custom variables in that file. Custom variables are accessed in the same way: you can access your custom `test` variable by using `site.test`.
+Variables defined in `_config.yml` can be accessed from your templates using the `site` object and dot notation. For example, you can access the `title` variable in your `_config.yml` file by using `site.title`. You can define your own custom variables in that file. Custom variables are accessed in the same way: you can access your custom `test` variable by using `site.test`.
 
 Several of those global configuration variables are implicit ([their values are specified by default](http://jekyllrb.com/docs/configuration/)) but they can all be overridden if needs be.
 
@@ -127,9 +127,9 @@ You can access all these variables through the `page` object in dot notation. Fo
 
 ### Collections
 
-[Collections](http://jekyllrb.com/docs/collections/) allow you to create logically related documents using a series of HTML or Markdown files. To create a collection, you will need to create a `_mycollection` folder at the root of your project and then to define `mycollection` in your `_config.yaml` file. The name of the folder without the underscore has to match the name of the collection defined in `_config.yaml`.
+[Collections](http://jekyllrb.com/docs/collections/) allow you to create logically related documents using a series of HTML or Markdown files. To create a collection, you will need to create a `_mycollection` folder at the root of your project and then to define `mycollection` in your `_config.yml` file. The name of the folder without the underscore has to match the name of the collection defined in `_config.yml`.
 
-Given a `_mycollection` folder, the following would define the collection in your `_config.yaml` file:
+Given a `_mycollection` folder, the following would define the collection in your `_config.yml` file:
 
 ```yaml
 collections:
@@ -186,7 +186,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque nobis perspicia
 
 #### YAML Front Matter defaults
 
-Rather than defining common variables for files in their individual YAML Front Matters, you can configure [YAML Front Matter defaults](http://jekyllrb.com/docs/configuration/#front-matter-defaults) through your `_config.yaml` file. Via the `default` variable, you can define default variables and common values for groups of files. These groups are defined using their `path` (mandatory) and their `type` (optionnal).
+Rather than defining common variables for files in their individual YAML Front Matters, you can configure [YAML Front Matter defaults](http://jekyllrb.com/docs/configuration/#front-matter-defaults) through your `_config.yml` file. Via the `default` variable, you can define default variables and common values for groups of files. These groups are defined using their `path` (mandatory) and their `type` (optionnal).
 
 - **path**: path from the root of the project. A `path` value is mandatory, even if you are using a `type` as well. An empty `path` value will target all files in your project.
 - **type**: target a file type. Available types are `pages`, `posts` and `collectionname`.
@@ -268,7 +268,7 @@ As you can see, variables defined either via individual YAML Front Matter or via
 {% endfor %}
 ```
 
-The `summary` variable defined in the YAML Front Matter of all projects can be accessed using `project.summary`. The `project.url` variable is automatically created by Jekyll based on the permalink pattern defined for items in the projects collection, either via their individual YAML Front Matter or via YAML Front Matter defaults in the `_config.yaml` file.
+The `summary` variable defined in the YAML Front Matter of all projects can be accessed using `project.summary`. The `project.url` variable is automatically created by Jekyll based on the permalink pattern defined for items in the projects collection, either via their individual YAML Front Matter or via YAML Front Matter defaults in the `_config.yml` file.
 
 Jekyll will also give you access to other global variables related to your pages, posts and collections. Here are the ones you will probably be using the most:
 
@@ -293,7 +293,7 @@ On top of the variables you create, [Jekyll automatically creates some variables
 
 #### Configuration variables
 
-The `site` variable can also be used to access the value of any variable defined in your `_config.yaml` file. If you have defined a `test` variable in your `_config.yaml` file, you can access it using `site.test`.  
+The `site` variable can also be used to access the value of any variable defined in your `_config.yml` file. If you have defined a `test` variable in your `_config.yml` file, you can access it using `site.test`.  
 
 ### Stay DRY: includes et layouts
 
@@ -301,7 +301,7 @@ The `site` variable can also be used to access the value of any variable defined
 
 Jekyll allows you to work with layout files. By default, these are stored in the `_layout` directory in your project. A child template will use or extend a parent template. All variables available in the child template will automatically be available to the parent template. The special `{{ content }}` variable is replaced in the parent template by the content of the child template.
 
-To use a layout, you just have to specify the layout to be used in the YAML Front Matter of the child template using the `layout` variable. Jekyll will go and fetch the specified template in the `_layout` directory. You can change the directory where layouts are stored via the `layouts_dir:  ./_layouts` in your `_config.yaml` file.
+To use a layout, you just have to specify the layout to be used in the YAML Front Matter of the child template using the `layout` variable. Jekyll will go and fetch the specified template in the `_layout` directory. You can change the directory where layouts are stored via the `layouts_dir:  ./_layouts` in your `_config.yml` file.
 
 Here is what using a layout looks like:
 
@@ -369,7 +369,7 @@ As said earlier, any variable defined in the child template will be available in
 
 #### Includes
 
-Liquid and Jekyll also let you use includes to store bits of code and use them repeatedly. By default, Jekyll will look for your includes files in the `_includes` directory. That behaviour can be changed using your `_config.yaml` file and the `includes_dir: ./_includes` configuration variable.
+Liquid and Jekyll also let you use includes to store bits of code and use them repeatedly. By default, Jekyll will look for your includes files in the `_includes` directory. That behaviour can be changed using your `_config.yml` file and the `includes_dir: ./_includes` configuration variable.
 
 ```Liquid
 {% include sidebar.html %}
@@ -544,7 +544,7 @@ The `where` filter will allow you to filter elements of an array. An example wou
 
 ### Data and YAML, JSON and CSV files
 
-As we said earlier, Jekyll allows you to easily manipulate data files written in YAML, JSON or CSV using Liquid. Here is an example with a navigation created on the basis of a YAML file. The `currentNav` variable would be specified either through the YAML Front Matter of each file, or via YAML Front Matter Defaults in your `_config.yaml`.
+As we said earlier, Jekyll allows you to easily manipulate data files written in YAML, JSON or CSV using Liquid. Here is an example with a navigation created on the basis of a YAML file. The `currentNav` variable would be specified either through the YAML Front Matter of each file, or via YAML Front Matter Defaults in your `_config.yml`.
 
 **YAML**: *_data/nav.yaml*
 ```yaml

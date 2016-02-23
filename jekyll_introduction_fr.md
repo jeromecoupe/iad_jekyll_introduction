@@ -80,7 +80,7 @@ Pour utiliser Jekyll, il vous suffit de créer un dossier dans votre environneme
 
 Jekyll devrait vous créer l'arborescence suivante (nous y reviendrons dans le détail) :
 
-- **_config.yaml** : fichier de configuration principal de votre site Jekyll
+- **_config.yml** : fichier de configuration principal de votre site Jekyll
 - **_includes** : contient vos includes
 - **_layouts** : contient vos fichiers de layout
   - **default.html** : layout par défaut
@@ -107,11 +107,11 @@ Depuis Jekyll 3.0.0, vous pouvez utiliser `jekyll build --incremental` pour rég
 
 ### Configuration
 
-Les [options de configuration globales](http://jekyllrb.com/docs/configuration/#global-configuration) de votre site sont stockées dans des variables définies dans le fichier `_config.yaml`.
+Les [options de configuration globales](http://jekyllrb.com/docs/configuration/#global-configuration) de votre site sont stockées dans des variables définies dans le fichier `_config.yml`.
 
-L'ensemble des variables définies dans le fichier `_config.yaml` sont accessibles dans vos templates via l'objet `site` en syntaxe pointée. Vous pouvez par exemple accéder à la variable `title` de votre `config.yaml` en utilisant `site.title`
+L'ensemble des variables définies dans le fichier `_config.yml` sont accessibles dans vos templates via l'objet `site` en syntaxe pointée. Vous pouvez par exemple accéder à la variable `title` de votre `config.yaml` en utilisant `site.title`
 
-Vous pouvez définir vos propres variables dans ce fichier. Elles seront alors accessibles dans vos templates via l'objet `site` en syntaxe pointée. Par exemple, si vous définissez une variable `test` dans le fichier `_config.yaml`, vous pourrez y accéder dans vos templates en utilisant `site.test`.
+Vous pouvez définir vos propres variables dans ce fichier. Elles seront alors accessibles dans vos templates via l'objet `site` en syntaxe pointée. Par exemple, si vous définissez une variable `test` dans le fichier `_config.yml`, vous pourrez y accéder dans vos templates en utilisant `site.test`.
 
 Certaines de ces options de configuration sont implicites ([spécifiées par défaut](http://jekyllrb.com/docs/configuration/)) mais peuvent être surdéterminées si besoin est.
 
@@ -131,7 +131,7 @@ Vous pouvez accéder à l'ensemble de ces variables via l'objet `page` en syntax
 
 ### Collections
 
-[Les collections](http://jekyllrb.com/docs/collections/) permettent de créer différents types de contenus liés entre eux de façon logique. Pour créer une collection, il suffit de créer un dossier nommé `_macollection` et puis de définir `macollection` dans votre fichier `_config.yaml`. Le nom du dossier sans tenir compte du caractère `_` doit être identique au nom de la collection spécifié dans le fichier `_config.yaml`.
+[Les collections](http://jekyllrb.com/docs/collections/) permettent de créer différents types de contenus liés entre eux de façon logique. Pour créer une collection, il suffit de créer un dossier nommé `_macollection` et puis de définir `macollection` dans votre fichier `_config.yml`. Le nom du dossier sans tenir compte du caractère `_` doit être identique au nom de la collection spécifié dans le fichier `_config.yml`.
 
 ```yaml
 collections:
@@ -186,7 +186,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque nobis perspicia
 
 #### YAML Front Matter defaults
 
-Plutôt que de définir les caractéristiques communes des fichiers dans leur YAML Front Matters individuels, vous pouvez utiliser votre fichier `_config.yaml` et spécifier des [valeurs de YAML Front Matter par défaut](http://jekyllrb.com/docs/configuration/#front-matter-defaults). Via la variable `defaults:`, votre fichier de configuration vous permet de définir des valeurs par défaut pour des variables communes à un ensemble de fichiers. Ces ensembles sont définis soit par un `path` (obligatoire) et par un `type` (optionnel).
+Plutôt que de définir les caractéristiques communes des fichiers dans leur YAML Front Matters individuels, vous pouvez utiliser votre fichier `_config.yml` et spécifier des [valeurs de YAML Front Matter par défaut](http://jekyllrb.com/docs/configuration/#front-matter-defaults). Via la variable `defaults:`, votre fichier de configuration vous permet de définir des valeurs par défaut pour des variables communes à un ensemble de fichiers. Ces ensembles sont définis soit par un `path` (obligatoire) et par un `type` (optionnel).
 
 - **path** : chemin depuis la racine du projet. Une valeur pour path est obligatoire, même si vous utilisez un type. Une valeur vide permet de cibler l'ensemble des fichiers du site.
 - **type** : type de fichier. Les types disponibles sont `pages`, `posts`, `nomcollection`.
@@ -241,8 +241,8 @@ Lorsque Jekyll tourne, il vous créée une série de variables auxquelles vous a
 
 #### Variables globales
 
-- `site`: utilisée principalement pour accéder aux tableaux reprenant vos pages, posts et documents de collections. Egalement utilisé pour accéder aux variables spécifiées dans votre fichier `_config.yaml`. Voir plus bas.
-- `page`: utilisée principalement pour accéder aux variables spécifiées via les YAML Front Matters de vos fichiers individuels ou via les YAML Front Matter par défaut spécifiées dans votre fichier `_config.yaml`.
+- `site`: utilisée principalement pour accéder aux tableaux reprenant vos pages, posts et documents de collections. Egalement utilisé pour accéder aux variables spécifiées dans votre fichier `_config.yml`. Voir plus bas.
+- `page`: utilisée principalement pour accéder aux variables spécifiées via les YAML Front Matters de vos fichiers individuels ou via les YAML Front Matter par défaut spécifiées dans votre fichier `_config.yml`.
 - `content`: variable spéciale utilisée uniquement dans les fichiers de layout. Cette variable sera remplacée par le contenu du post, de la page ou du document membre d'une collection auquel le fichier de layout est appliqué. Voir plus bas.
 
 #### Variables liées aux collections, pages et data
@@ -268,7 +268,7 @@ Les variables définies via les YAML Front Matter (individuels ou par défaut) s
 {% endfor %}
 ```
 
-La variable `summary` dans le YAML Front Matter de tous les projets, est accessible dans cette boucle `for` en utilisant `project.summary`. La variable `project.url` est automatiquement créée par Jekyll sur base du pattern de permalink défini pour les documents de cette collection, soit via leurs YAML Front Matter individuels, soit via les YAML Front Matter par défaut dans le fichier `_config.yaml`.
+La variable `summary` dans le YAML Front Matter de tous les projets, est accessible dans cette boucle `for` en utilisant `project.summary`. La variable `project.url` est automatiquement créée par Jekyll sur base du pattern de permalink défini pour les documents de cette collection, soit via leurs YAML Front Matter individuels, soit via les YAML Front Matter par défaut dans le fichier `_config.yml`.
 
 Jekyll vous donne également accès à d'autres variables globales liées à vos pages, collections et data. Voici sans doute celles que vous utiliserez le plus:
 
@@ -293,7 +293,7 @@ En plus des variables que vous définissez, Jekyll créée [automatiquement cert
 
 #### Variables de configuration
 
-La variable `site` peut également être utilisée pour accéder aux valeurs des variables définies dans votre fichier `_config.yaml`. Si vous avez défini une variable `test` dans votre fichier `_config.yaml`, vous pouvez y accéder en utilisant simplement `site.test`.
+La variable `site` peut également être utilisée pour accéder aux valeurs des variables définies dans votre fichier `_config.yml`. Si vous avez défini une variable `test` dans votre fichier `_config.yml`, vous pouvez y accéder en utilisant simplement `site.test`.
 
 ### Rester DRY: includes et layouts
 
@@ -368,7 +368,7 @@ layout: default
 
 #### Includes
 
-Liquid et Jekyll vous permettent également d'utiliser des includes pour stocker les morceaux de code appelés à se répéter. Par défaut, Jekyll cherchera vos fichiers includes dans le répertoire `_includes`. Cela peut être modifié dans votre fichier `_config.yaml` via la variable `includes_dir: ./_includes`.
+Liquid et Jekyll vous permettent également d'utiliser des includes pour stocker les morceaux de code appelés à se répéter. Par défaut, Jekyll cherchera vos fichiers includes dans le répertoire `_includes`. Cela peut être modifié dans votre fichier `_config.yml` via la variable `includes_dir: ./_includes`.
 
 ```Liquid
 {% include sidebar.html %}
