@@ -186,7 +186,12 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque nobis perspicia
 
 #### YAML Front Matter defaults
 
-Plutôt que de définir les caractéristiques communes des fichiers dans leur YAML Front Matters individuels, vous pouvez utiliser votre fichier `_config.yml` et spécifier des [valeurs de YAML Front Matter par défaut](http://jekyllrb.com/docs/configuration/#front-matter-defaults). Via la variable `defaults:`, votre fichier de configuration vous permet de définir des valeurs par défaut pour des variables communes à un ensemble de fichiers. Ces ensembles sont définis soit par un `path` (obligatoire) et par un `type` (optionnel).
+Plutôt que de définir les caractéristiques communes des fichiers dans leur YAML Front Matters individuels, vous pouvez utiliser votre fichier `_config.yml` et spécifier des [valeurs de YAML Front Matter par défaut](http://jekyllrb.com/docs/configuration/#front-matter-defaults). Via la variable `defaults:`, votre fichier de configuration vous permet de définir des valeurs par défaut pour des variables communes à un ensemble de fichiers.
+
+Ces ensembles sont définis par une liste de défauts. Chacun de ces défauts dans cette liste est défini par deux variables:
+
+1. `scope` qui prend comme valeurs un `path` (obligatoire) et un `type` (optionnel).
+2. `values` qui défini vos variables par défaut et leurs valeurs
 
 - **path** : chemin depuis la racine du projet. Une valeur pour path est obligatoire, même si vous utilisez un type. Une valeur vide permet de cibler l'ensemble des fichiers du site.
 - **type** : type de fichier. Les types disponibles sont `pages`, `posts`, `nomcollection`.
@@ -195,23 +200,29 @@ Vous pouvez ainsi spécifier facilement la valeur par défaut pour les variables
 
 ```yaml
 defaults:
-  scope:
-    path: "/about"
-  values:
-    layout: "default"
-    maVariable: maValeur
+  - scope:
+      path: "/about"
+    values:
+      layout: "default"
+      myVariable: myValue
 ```
 
-ou
+or
 
 ```yaml
 defaults:
-  scope:
-    path: "" # l'ensemble des fichers de votre projet
-    type: "portfolio" # les fichiers de la collection portfolio
-  values:
-    layout: "default"
-    maVariable: maValeur
+  - scope:
+      path: "" # all files in your project
+      type: "portfolio" # files in the "portfolio" collection
+    values:
+      layout: "portfolio"
+      myVariable: myValue
+  - scope:
+      path: "" # all files in your project
+      type: "posts" # files in the "posts" collection
+    values:
+      layout: "default"
+      myVariable: myValue
 ```
 
 ### Data

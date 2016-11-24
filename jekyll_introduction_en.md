@@ -186,7 +186,12 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque nobis perspicia
 
 #### YAML Front Matter defaults
 
-Rather than defining common variables for files in their individual YAML Front Matters, you can configure [YAML Front Matter defaults](http://jekyllrb.com/docs/configuration/#front-matter-defaults) through your `_config.yml` file. Via the `default` variable, you can define default variables and common values for groups of files. These groups are defined using their `path` (mandatory) and their `type` (optionnal).
+Rather than defining common variables for files in their individual YAML Front Matters, you can configure [YAML Front Matter defaults](http://jekyllrb.com/docs/configuration/#front-matter-defaults) through your `_config.yml` file. Via the `default` variable, you can define default variables and common values for groups of files.
+
+These groups are defined by a list of defaults, each default in the list is defined by:
+
+1. a `scope` variable defined by a `path` (mandatory) and a `type` (optional).
+2. a `values` variable defining each of your variables and their default values.
 
 - **path**: path from the root of the project. A `path` value is mandatory, even if you are using a `type` as well. An empty `path` value will target all files in your project.
 - **type**: target a file type. Available types are `pages`, `posts` and `collectionname`.
@@ -195,23 +200,29 @@ For example, you can specify common values for Jekyll-specific variables like `l
 
 ```yaml
 defaults:
-  scope:
-    path: "/about"
-  values:
-    layout: "default"
-    myVariable: myValue
+  - scope:
+      path: "/about"
+    values:
+      layout: "default"
+      myVariable: myValue
 ```
 
 or
 
 ```yaml
 defaults:
-  scope:
-    path: "" # all files in your project
-    type: "portfolio" # files in the "portfolio" collection
-  values:
-    layout: "default"
-    myVariable: myValue
+  - scope:
+      path: "" # all files in your project
+      type: "portfolio" # files in the "portfolio" collection
+    values:
+      layout: "portfolio"
+      myVariable: myValue
+  - scope:
+      path: "" # all files in your project
+      type: "posts" # files in the "posts" collection
+    values:
+      layout: "default"
+      myVariable: myValue
 ```
 
 ### Data
