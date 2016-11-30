@@ -60,15 +60,21 @@ Vous pouvez ensuite choisir quelle version de Ruby vous voulez utiliser :
 
 `rvm list` et `rvm --default use 2.2.3`
 
-### Installation de la gem Jekyll
+### Installation des gems Bundler et Jekyll
 
-Pour installer Jekyll, il vous suffit d'utiliser la commande suivante :
+Bundler est un outil de gestion des dépendances en Ruby. Il vous permet de spécifier quelle version d'une gem vous voulez utiliser pour un projet et d'exécuter toutes vos commandes sur la version de la gem spécifiée dans votre Gemfile. Bundler est maintenant la manière conseillée d'installer Jekyll.
 
-`gem install jekyll`
+Pour installer Bundler et Jekyll, vous n'avez qu'à utiliser la commande suivante:
+
+`gem install bundler jekyll`
+
+Si vous souhaitez simplement installer Jekyll, tapez simplement `gem install jekyll`.
 
 ### Mise à jour de Jekyll
 
-`gem update jekyll` vous permettra de mettre à jour votre version de Jekyll lorsqu'une nouvelle version est disponible.
+Si vous n'installer pas Bundler, `gem update jekyll` vous permettra de mettre à jour votre version de Jekyll lorsqu'une nouvelle version est disponible.
+
+Si bundler est installé, il suffit de modifier la version de Jekyll spécifiée dans votre Gemfile et de taper `bundle update`
 
 ## Utilisation
 
@@ -78,19 +84,38 @@ Pour utiliser Jekyll, il vous suffit de créer un dossier dans votre environneme
 
 `jekyll new mondossiersite/` ou `jekyll new .` pour installer Jekyll dans le dossier courant.
 
-Jekyll devrait vous créer l'arborescence suivante (nous y reviendrons dans le détail) :
+Jekyll devrait vous créer une arborescence de dossiers et de fichiers. L'installation par défaut de Jekyll utilise des themes et de plugins. Nous n'en utiliserons pas ici. Il vous faudra donc reproduire précisément cette arborescence de dossiers et de fichiers:
 
-- **_config.yml** : fichier de configuration principal de votre site Jekyll
-- **_includes** : contient vos includes
-- **_layouts** : contient vos fichiers de layout
-  - **default.html** : layout par défaut
-  - **post.html** : layout utilisé pour vos posts
-- **_posts** : dossier contenant vos blogposts
-- **_sass** : contient vos fichiers .scss
-- **css** : contient votre fichier .scss maître qui importe les autres
-- **about.md** : contient votre page about
-- **index.html** : la homepage de votre site
-- **feed.xml** : un template de flux RSS
+- **_config.yml**: fichier de configuration principal de votre site Jekyll (supprimer les options liées au thèmes et aux plugins (voir infra))
+- **_includes**: contient vos includes (créer le dossier)
+- **_layouts**: contient vos fichiers de layout (créer le dossier)
+- **_posts**: dossier contenant vos blogposts (supprimer les fichiers créés lors de l'installation)
+- **_sass**: contient vos fichiers .scss
+- **css**: contient votre fichier .scss maître qui importe les autres
+- **about.md**: supprimer le fichier
+- **index.md**: supprimer le fichier
+- **index.html**: la homepage de votre site (faire une page HTML simple type 'hello world')
+- **Gemfile**: configuration de Bundler
+- **Gemfile.lock**: fichier utilisé par Bundler pour manager vos dépendances
+
+Pour ne pas utiliser de thèmes ni de plugins, il vous faudra commenter (en ajoutant un caractère '#') les lignes suivantes dans votre Gemfile
+
+```
+# gem "minima", "~> 2.0"
+```
+et
+
+```
+# gem "jekyll-feed", "~> 0.6"
+```
+
+Veuillez aussi supprimer les lignes liées aux thèmes et aux plugins de votre fichier `_config.yaml`:
+
+```
+theme: minima
+gems:
+  - jekyll-feed
+```
 
 ### Concepts et commandes de base
 
@@ -99,9 +124,9 @@ Jekyll fonctionne en parcourant cette arborescence pour générer un site statiq
 - Jekyll va traiter tous les fichiers contenant un YAML Front Matter (y compris un YAML Front Matter vide), les sauver temporairement et les rendre utilisables par Liquid et les tags Jekyll.
 - les dossiers et fichiers dont le nom commence par un underscore ne seront pas transférés dans le dossier `_site`, tandis que les dossiers et fichiers dont le nom ne commence pas par un underscore seront transférés dans le dossier `_site`.
 
-Une fois dans le dossier de votre projet, la commande `jekyll build` est utilisée pour générer votre site. Si vous souhaitez que ce site soit généré à nouveau automatiquement dès que Jekyll détecte des changements dans votre projet, utilisez la commande `jekyll build --watch`.
+Une fois dans le dossier de votre projet, les commandes `jekyll build` ou `bundle exec jekyll build` est utilisée pour générer votre site. Si vous souhaitez que ce site soit généré à nouveau automatiquement dès que Jekyll détecte des changements dans votre projet, utilisez la commande `jekyll build --watch`.
 
-Vous pouvez également utiliser `jekyll serve` pour vous permettre de visualiser votre site sur un serveur de développement à l'adresse `http://localhost:4000/` (la régénération automatique est activée par défaut).
+Vous pouvez également utiliser `jekyll serve` ou `bundle exec jekyll serve` pour vous permettre de visualiser votre site sur un serveur de développement à l'adresse `http://localhost:4000/` (la régénération automatique est activée par défaut).
 
 Depuis Jekyll 3.0.0, vous pouvez utiliser `jekyll build --incremental` pour régénérer votre site de façon incrémentale et gagner du temps, ainsi que `jekyll build --profiler` pour faire tourner un profiler vous montrant le temps de build pour chaque ressource.
 
@@ -509,7 +534,7 @@ Cette fonctionnalité peut être très utile dans certaines situations, par exem
 {% endfor %}
 ```
 
-### Filtres: `sort`, `group_by` et `where`
+### Filtres: `sort`, `group_by`, `where` et `where_exp`
 
 Liquid possède [une série de filtres](https://github.com/shopify/liquid/wiki/Liquid-for-Designers#standard-filters) qui vous permettent de transformer des chaînes de cractères, des chiffres, des tableaux et des objets de diverses façons.
 
@@ -517,7 +542,8 @@ Jekyll possède également quelques filtres qui lui sont propres. Parmi eux, tro
 
 - `sort` : permet, comme nous venons de le voir, de trier un tableau ou un hash à l'aide d'une de ses valeurs.
 - `group_by` : permet de grouper un tableau ou un hash par l'une de ses variables ou keys.
-- `where` : permet de filtrer les éléments d'un tableau ou d'un hash à l'aide d'une de ses valeurs.
+- `where` : permet de sélectionner les éléments d'un tableau ou d'un hash pour lesquels la key spécifiée à la valeur reseignée.
+- `where_exp`: permet de sélectionner les éléments d'un tableau ou d'un hash si l'expression renseignée est vraie.
 
 Voici quelques exemples d'applications pour les filtres `group_by` et `where` :
 
@@ -546,6 +572,38 @@ Le filtre `where` va permettre de filtrer les éléments d'un array, par exemple
 {% assign postsByAuthor = site.posts | where:"author","Gengis Khan" %}
 
 {% for item in postsByAuthor %}
+  {% if forloop.first %}<ul>{% endif %}
+    <li>{{ item.title }}</li>
+  {% if forloop.last %}</ul>{% endif %}
+{% endfor %}
+```
+
+Le filtre `where` ne vous permet de que de tester une égalité stricte, tandis que le filtre `where_exp` vous offre quant à lui d'avantage de possibilités.
+
+```liquid
+{% assign projectsByYear = site.projects | where_exp:"item", "item.projectYear == 2014" %}
+
+{% for item in projectsByYear %}
+  {% if forloop.first %}<ul>{% endif %}
+    <li>{{ item.title }}</li>
+  {% if forloop.last %}</ul>{% endif %}
+{% endfor %}
+```
+
+```liquid
+{% assign recentProjects = site.projects | where_exp:"item", "item.projectYear > 2014" %}
+
+{% for item in recentProjects %}
+  {% if forloop.first %}<ul>{% endif %}
+    <li>{{ item.title }}</li>
+  {% if forloop.last %}</ul>{% endif %}
+{% endfor %}
+```
+
+```liquid
+{% assign codeProjects = site.projects | where_exp:"item", "item.projectTags contains 'code'" %}
+
+{% for item in codeProjects %}
   {% if forloop.first %}<ul>{% endif %}
     <li>{{ item.title }}</li>
   {% if forloop.last %}</ul>{% endif %}

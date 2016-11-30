@@ -58,15 +58,21 @@ You can then choose the version of Ruby you want to use amongst the ones RVM has
 
 `rvm list` and `rvm --default use 2.2.3`
 
-### Install the Jekyll gem
+### Install Jekyll and Bundler gems
 
-To install Jekyll, you just have to run the following command:
+Bundler is a tool that will allow to manage your Ruby dependencies and to specify which versions of them you want to use for your project. It is now the recommended way to install Jekyll.
 
-`gem install jekyll`
+To install Bundler and Jekyll, you just have to run the following command:
+
+`gem install bundler jekyll`
+
+If you just want to install Jekyll, just type in `gem install jekyll`.
 
 ### Update Jekyll
 
-`gem update jekyll` will allow you to update your verison of Jekyll when a new one is available.
+If you don't install bundler, `gem update jekyll` will allow you to update your verison of Jekyll when a new one is available.
+
+If you have bundler installed, simply bump up the version of Jekyll in your Gemfile and then run `bundle update`
 
 ## Usage
 
@@ -74,21 +80,21 @@ To install Jekyll, you just have to run the following command:
 
 To create a Jekyll project, you just have to create a folder in your local dev environment and use the following command:
 
-`jekyll new myprojectfolder/` or `jekyll new .` to install jekyll in the folder you are currently in.
+`jekyll new myprojectfolder/` or `jekyll new .` to install Jekyll in the folder you are currently in.
 
-Jekyll will create the following folders and files for you. We will come back to this in detail later on:
+Jekyll will create a bunch of files and folders for you. The default Jekyll install uses themes and plugins. We are not going to use those so you will have to replicate the following folders and files architecture.
 
-- **_config.yml**: main configuration file for your Jekyll site
+- **_config.yml**: main configuration file for your Jekyll site (remove themes and plugins configuration: see below)
 - **_includes**: contains your include files
 - **_layouts**: contains your layout files
-  - **default.html**: default layout
-  - **post.html**: layout used by blogposts
-- **_posts**: contains all your blogposts
+- **_posts**: contains all your blogposts (delete any file in there for now)
 - **_sass**: contains you .scss files
 - **css**: contains your master .scss file importing all the others
-- **about.md**: the template of your about page
-- **index.html**: the template for the homepage of your site
-- **feed.xml**: the template of your RSS feed
+- **about.md**: delete file
+- **index.md**: delete file
+- **index.html**: the template for the homepage of your site (create a basic hello world HTML file)
+- **Gemfile** : Bundler configuration file
+- **Gemfile.lock** : file used by Bundler to manage dependencies for this project
 
 ### Basic concepts and commands
 
@@ -97,9 +103,9 @@ Jekyll will use these files and folders as a basis to create a fully static webs
 - Jekyll will process all files with a YAML Front Matter (including empty YAML Front Matters), make them available in memory and make them usable by the Liquid templating engine and Jekyll tags.
 - Files and folders with a name starting with underscore will not be transferred to the `_site` folder, while the others will be after having been processed by the Jekyll pipeline.
 
-When in your project folder, the `jekyll build` command is used to generate your website. If you want the regeneration to happen every time a file is changed, just use the `--watch` flag: `jekyll build --watch`.
+When in your project folder, the `jekyll build` or `bundle exec jekyll build` commands are used to generate your website. If you want the regeneration to happen every time a file is changed, just use the `--watch` flag: `jekyll build --watch`.
 
-You can also use `jekyll serve` to launch a development server and vie your site at `http://localhost:4000/` (auto-regeneration is on by default).
+You can also use `jekyll serve` or `bundle exec jekyll serve` to launch a development server and vie your site at `http://localhost:4000/` (auto-regeneration is on by default).
 
 Since Jekyll 3.0.0 you can use `jekyll build --incremental` to regenerate only the parts of the site that changed instead of the hole thing each time, a big deal for huge websites. You can also use `jekyll build --profiler` and Jekyll will give you a build time for each of your resources to identify possible bottlenecks.
 
@@ -485,9 +491,9 @@ As the name suggests, `capture` allows you to capture various strings and to sto
 {% capture fullName %}{{ item.name | capitalize }} {{ item.surname | capitalize }}{% endcapture %}
 ```
 
-That functionality can be very useful in certain situations, for example when you have to create a yearly archive of your posts:
+That functionality can be very useful in certain situations, for example when you have to create a yearly archive of your posts.
 
-```Liquid
+```liquid
 {% assign allPosts = site.posts | sort:"post.date" %}
 {% for item in allPosts %}
 
@@ -510,7 +516,7 @@ That functionality can be very useful in certain situations, for example when yo
 {% endfor %}
 ```
 
-### Filters: `sort`, `group_by` et `where`
+### Filters: `sort`, `group_by`, `where` and `where_exp`
 
 Liquid makes [a series of filters](https://github.com/shopify/liquid/wiki/Liquid-for-Designers#standard-filters) available to you. Filters will help you to modify the output of strings, numbers, objects and arrays in various ways.
 
@@ -518,7 +524,8 @@ Jekyll also has a few filters of its own. Among them, three are really interesti
 
 - `sort`: allows you to sort and array or hash by one of its properties.
 - `group_by`: allows you to group an array of a hash by one of its properties.
-- `where`: allows you to filter the elements of an array or a hash by one of its properties.
+- `where`: allows you to filter the elements of an array or a hash where the key has the given value.
+- `where_exp`: allows you to all objects in an array or hash where the expression is true.
 
 Here are some examples for the `group_by` and `sort` filters:
 
@@ -539,14 +546,46 @@ Here are some examples for the `group_by` and `sort` filters:
 {% endfor %}
 ```
 
-The `where` filter will allow you to filter elements of an array. An example would be to only display the posts by one specific author. In order for this code to work, you obviously need an `author` variable to be defined in the YAML Front Matters of your posts.
+The `where` and `where_exp` filters allow you to filter elements of an array. An example would be to only display the posts by one specific author. In order for this code to work, you obviously need an `author` variable to be defined in the YAML Front Matters of your posts.
 
-```Liquid
+```liquid
 <h2>Posts by author</h2>
 
 {% assign postsByAuthor = site.posts | where:"author","Gengis Khan" %}
 
 {% for item in postsByAuthor %}
+  {% if forloop.first %}<ul>{% endif %}
+    <li>{{ item.title }}</li>
+  {% if forloop.last %}</ul>{% endif %}
+{% endfor %}
+```
+
+The `where` filter only allows you to check for strict equality. The `where_exp` filter offers you more possibilities.
+
+```liquid
+{% assign projectsByYear = site.projects | where_exp:"item", "item.projectYear == 2014" %}
+
+{% for item in projectsByYear %}
+  {% if forloop.first %}<ul>{% endif %}
+    <li>{{ item.title }}</li>
+  {% if forloop.last %}</ul>{% endif %}
+{% endfor %}
+```
+
+```liquid
+{% assign recentProjects = site.projects | where_exp:"item", "item.projectYear > 2014" %}
+
+{% for item in recentProjects %}
+  {% if forloop.first %}<ul>{% endif %}
+    <li>{{ item.title }}</li>
+  {% if forloop.last %}</ul>{% endif %}
+{% endfor %}
+```
+
+```liquid
+{% assign codeProjects = site.projects | where_exp:"item", "item.projectTags contains 'code'" %}
+
+{% for item in codeProjects %}
   {% if forloop.first %}<ul>{% endif %}
     <li>{{ item.title }}</li>
   {% if forloop.last %}</ul>{% endif %}
