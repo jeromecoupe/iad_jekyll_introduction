@@ -668,4 +668,5 @@ Le duo Jekyll et GitHub Pages vous permet de disposer d'un environnement collabo
 - [Get Started With GitHub Pages (Plus Bonus Jekyll)](https://24ways.org/2013/get-started-with-github-pages/) - Anna Debenham : bonne introduction au duo Github Pages et Jekyll
 - [Build A Blog With Jekyll And GitHub Pages](http://www.smashingmagazine.com/2014/08/build-blog-jekyll-github-pages/) - Barry Clark : une  introduction centrée sur un blog.
 - [Front-end style guides with Jekyll](http://webstoemp.com/blog/front-end-style-guides-jekyll/) - Jérôme Coupé : utilisation de Jekyll pour réaliser facilement des styles guides.
-- [Static Sites Go All Hollywood](https://vimeo.com/145138875) - Phil Hawksworth: une bonne introduction aux avantages, inconvénients et workflows liés aux static sites generators.
+- [Static Sites Go All Hollywood](https://www.youtube.com/watch?v=_cuZcnJIjls) - Phil Hawksworth: une bonne introduction aux avantages, inconvénients et workflows liés aux static sites generators.
+- [The JAM Stack](https://vimeo.com/163522126) - Mathias Bilmann: discussion en profondeur sur les avantages des sites statiques et leurs possibles évolutions
