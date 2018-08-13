@@ -114,8 +114,6 @@ Veuillez aussi supprimer les lignes liées aux thèmes et aux plugins de votre f
 
 ```
 theme: minima
-gems:
-  - jekyll-feed
 ```
 
 ### Concepts et commandes de base
