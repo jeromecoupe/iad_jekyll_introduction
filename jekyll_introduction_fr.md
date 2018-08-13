@@ -44,7 +44,8 @@ Cette commande installera la dernière version stable de RVM, ainsi que la derni
 
 Pour être certain de disposer de la dernière version de RVM, utilisez la commande suivante :
 
-`rvm get stable`
+`rvm upgrade;`
+`rvm get stable;`
 
 #### Mise à jour de Ruby
 
