@@ -310,7 +310,7 @@ On top of the variables you create, [Jekyll automatically creates some variables
 
 #### Configuration variables
 
-The `site` variable can also be used to access the value of any variable defined in your `_config.yml` file. If you have defined a `test` variable in your `_config.yml` file, you can access it using `site.test`.  
+The `site` variable can also be used to access the value of any variable defined in your `_config.yml` file. If you have defined a `test` variable in your `_config.yml` file, you can access it using `site.test`.
 
 ### Stay DRY: includes et layouts
 
@@ -491,31 +491,6 @@ As the name suggests, `capture` allows you to capture various strings and to sto
 {% capture fullName %}{{ item.name | capitalize }} {{ item.surname | capitalize }}{% endcapture %}
 ```
 
-That functionality can be very useful in certain situations, for example when you have to create a yearly archive of your posts.
-
-```liquid
-{% assign allPosts = site.posts | sort:"post.date" %}
-{% for item in allPosts %}
-
-  {% if forloop.first %}<ul>{% endif %}
-
-  {% capture currentYear %}{{ item.date | date: "%Y" }}{% endcapture %}
-
-    {% if postYear != currentYear %}
-      {% if forloop.index != 1 %}</ul>{% endif %}
-      <h2>{{ currentYear }}</h2>
-      <ul>
-    {% endif %}
-
-    <li>{{ item.title }}</li>
-
-    {% capture postYear %}{{ item.date | date: "%Y" }}{% endcapture %}
-
-  {% if forloop.last %}</ul>{% endif %}
-
-{% endfor %}
-```
-
 ### Filters: `sort`, `group_by`, `where` and `where_exp`
 
 Liquid makes [a series of filters](https://github.com/shopify/liquid/wiki/Liquid-for-Designers#standard-filters) available to you. Filters will help you to modify the output of strings, numbers, objects and arrays in various ways.
@@ -524,10 +499,11 @@ Jekyll also has a few filters of its own. Among them, three are really interesti
 
 - `sort`: allows you to sort and array or hash by one of its properties.
 - `group_by`: allows you to group an array of a hash by one of its properties.
+- `group_by_exp`: allows you to group an array of a hash by one of its properties while using Liquid expressions.
 - `where`: allows you to filter the elements of an array or a hash where the key has the given value.
 - `where_exp`: allows you to all objects in an array or hash where the expression is true.
 
-Here are some examples for the `group_by` and `sort` filters:
+Here are some examples:
 
 `group_by` and nested for loops will for example allow you to easily group your posts by one of their properties. For example, if each of your posts has a `postType` variable in their YAML Front Matter, you can easily create an archive of your posts grouped per type.
 
@@ -543,6 +519,33 @@ Here are some examples for the `group_by` and `sort` filters:
       <li>{{ item.title }}</li>
     {% if forloop.last %}</ul>{% endif %}
   {% endfor %}
+{% endfor %}
+```
+
+If you need to group things but also use Liquid expressions (for tests or filters), use `group_by_exp`.
+
+```Liquid
+{% assign blogpostsByYear = site.blogposts|group_by_exp: "item", "item.date|date:'%Y'"|reverse %}
+
+{% for year in blogpostsByYear %}
+  {% if forloop.first %}<ul>{% endif %}
+    <li>
+      <h2>{{ year.name }}</h2>
+
+      {% for post in year.items %}
+        {% if forloop.first %}<ul>{% endif %}
+          <li>
+            <article>
+              <p>{{ post.date|date:'%Y-%m-%d' }}</p>
+              <h3>{{ post.title }}</h3>
+              <p>{{ post.summary }}</p>
+            </article>
+          </li>
+        {% if forloop.last %}</ul>{% endif %}
+      {% endfor %}
+
+    </li>
+    {% if forloop.last %}</ul>{% endif %}
 {% endfor %}
 ```
 

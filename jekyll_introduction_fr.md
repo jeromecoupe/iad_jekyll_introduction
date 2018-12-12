@@ -508,32 +508,7 @@ Dans ce cas précis, combiner un classement alphabétique sur le titre et le par
 {% capture fullName %}{{ item.name | capitalize }} {{ item.surname | capitalize }}{% endcapture %}
 ```
 
-Cette fonctionnalité peut être très utile dans certaines situations, par exemple pour créer une archive de vos posts classés par année:
-
-```Liquid
-{% assign allPosts = site.posts | sort: 'post.date' %}
-{% for item in allPosts %}
-
-  {% if forloop.first %}<ul>{% endif %}
-
-  {% capture currentYear %}{{ item.date | date: "%Y" }}{% endcapture %}
-
-    {% if postYear != currentYear %}
-      {% if forloop.index != 1 %}</ul>{% endif %}
-      <h2>{{ currentYear }}</h2>
-      <ul>
-    {% endif %}
-
-    <li>{{ item.title }}</li>
-
-    {% capture postYear %}{{ item.date | date: "%Y" }}{% endcapture %}
-
-  {% if forloop.last %}</ul>{% endif %}
-
-{% endfor %}
-```
-
-### Filtres: `sort`, `group_by`, `where` et `where_exp`
+### Filtres: `sort`, `group_by`, `group_by_exp`, `where` et `where_exp`
 
 Liquid possède [une série de filtres](https://github.com/shopify/liquid/wiki/Liquid-for-Designers#standard-filters) qui vous permettent de transformer des chaînes de cractères, des chiffres, des tableaux et des objets de diverses façons.
 
@@ -541,6 +516,7 @@ Jekyll possède également quelques filtres qui lui sont propres. Parmi eux, tro
 
 - `sort` : permet, comme nous venons de le voir, de trier un tableau ou un hash à l'aide d'une de ses valeurs.
 - `group_by` : permet de grouper un tableau ou un hash par l'une de ses variables ou keys.
+- `group_by_exp` : permet de grouper un tableau ou un hash par l'une de ses variables ou keys en utilisant une expression en Liquid.
 - `where` : permet de sélectionner les éléments d'un tableau ou d'un hash pour lesquels la key spécifiée à la valeur reseignée.
 - `where_exp`: permet de sélectionner les éléments d'un tableau ou d'un hash si l'expression renseignée est vraie.
 
@@ -560,6 +536,33 @@ Voici quelques exemples d'applications pour les filtres `group_by` et `where` :
       <li>{{ item.title }}</li>
     {% if forloop.last %}</ul>{% endif %}
   {% endfor %}
+{% endfor %}
+```
+
+Si vous devez non seulement grouper les choses mais aussi utiliser des expression Liquid (tests ou filtres), utilisez plutôt `group_by_exp`
+
+```Liquid
+{% assign blogpostsByYear = site.blogposts|group_by_exp: "item", "item.date|date:'%Y'"|reverse %}
+
+{% for year in blogpostsByYear %}
+  {% if forloop.first %}<ul>{% endif %}
+    <li>
+      <h2>{{ year.name }}</h2>
+
+      {% for post in year.items %}
+        {% if forloop.first %}<ul>{% endif %}
+          <li>
+            <article>
+              <p>{{ post.date|date:'%Y-%m-%d' }}</p>
+              <h3>{{ post.title }}</h3>
+              <p>{{ post.summary }}</p>
+            </article>
+          </li>
+        {% if forloop.last %}</ul>{% endif %}
+      {% endfor %}
+
+    </li>
+    {% if forloop.last %}</ul>{% endif %}
 {% endfor %}
 ```
 
